@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Will I Have A Job? Find out when AI will make your occupation obsolete! A satirical take on AI replacement anxiety.">
+    <title>Will I Have A Job? 🎰 AI Replacement Prediction</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/popup.css">
+</head>
+<body>
+    <!-- Sparkle Container (for animated sparkles) -->
+    <div id="sparkle-container" aria-hidden="true"></div>
+
+    <!-- Confetti Canvas (for particle effects) -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- Audio Unlock Overlay -->
+    <div id="audio-unlock-overlay" class="hidden" role="dialog" aria-labelledby="audio-unlock-title" aria-describedby="audio-unlock-desc">
+        <div class="unlock-content">
+            <h2 id="audio-unlock-title">🎰 CLICK TO WIN! 🎰</h2>
+            <p id="audio-unlock-desc">Activate your full job prediction experience!</p>
+            <button id="audio-unlock-btn" class="cta-button">ACTIVATE PREDICTIONS!</button>
+        </div>
+    </div>
+
+    <!-- Fake Urgent Timer Banner -->
+    <div id="urgent-timer-banner" class="urgent-banner" role="status" aria-live="polite">
+        <span class="warning-icon">⚠️</span>
+        <span id="urgent-timer-text">OFFER EXPIRES IN: <strong id="urgent-countdown">00:00</strong></span>
+        <span class="warning-icon">⚠️</span>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <h1 class="site-title">
+            <span class="mega-title">WILL I HAVE A JOB?</span>
+            <span class="subtitle">Find Out When AI Will Replace You!</span>
+        </h1>
+        <p class="tagline">The #1 AI Job Replacement Prediction Tool Trusted by Millions*</p>
+        <p class="disclaimer-small">*Not actually trusted by anyone. This is satire.</p>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- Occupation Search Section -->
+        <section class="search-section card" aria-labelledby="search-heading">
+            <h2 id="search-heading" class="section-title">🔮 DISCOVER YOUR FATE 🔮</h2>
+            <p class="section-description">Enter your occupation below to reveal your AI replacement timeline!</p>
+
+            <div class="search-container">
+                <label for="occupation-input" class="visually-hidden">Enter your occupation</label>
+                <input
+                    type="text"
+                    id="occupation-input"
+                    class="occupation-input"
+                    placeholder="e.g., Software Developer, Teacher, Chef..."
+                    aria-describedby="search-help"
+                >
+                <button id="search-btn" class="cta-button">CHECK MY ODDS!</button>
+            </div>
+            <p id="search-help" class="help-text">Don't worry, your data is as safe as your job prospects!</p>
+        </section>
+
+        <!-- Results Section (Hidden by default) -->
+        <section id="results-section" class="results-section hidden" aria-live="polite" aria-atomic="true">
+
+            <!-- Occupation Info Card -->
+            <div class="card result-card">
+                <h3 class="result-title">YOUR PREDICTION RESULTS</h3>
+                <div class="occupation-display">
+                    <span class="occupation-label">Occupation:</span>
+                    <span id="result-occupation" class="occupation-value"></span>
+                </div>
+            </div>
+
+            <!-- Countdown Timer Card -->
+            <div class="card countdown-card">
+                <h3 class="countdown-title">TIME REMAINING UNTIL OBSOLETE</h3>
+                <div id="countdown-display" class="countdown-display">
+                    <div class="countdown-unit">
+                        <span id="days" class="countdown-number">000</span>
+                        <span class="countdown-label">DAYS</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <span id="hours" class="countdown-number">00</span>
+                        <span class="countdown-label">HOURS</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <span id="minutes" class="countdown-number">00</span>
+                        <span class="countdown-label">MINUTES</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <span id="seconds" class="countdown-number">00</span>
+                        <span class="countdown-label">SECONDS</span>
+                    </div>
+                </div>
+                <div id="obsolete-date-display" class="obsolete-date">
+                    <strong>Obsolescence Date:</strong> <span id="obsolete-date"></span>
+                </div>
+                <div id="ai-model-display" class="ai-model">
+                    <strong>Replaced By:</strong> <span id="ai-model"></span>
+                </div>
+                <p id="prediction-note" class="prediction-note"></p>
+            </div>
+
+            <!-- Odds Calculator Card -->
+            <div class="card odds-card">
+                <h3 class="odds-title">YOUR SURVIVAL ODDS</h3>
+                <div class="odds-container">
+                    <div class="odd-item">
+                        <div class="odd-label">AI Will Augment Your Work:</div>
+                        <div class="odd-value">
+                            <span id="augment-odds" class="rolling-number">0.0</span>%
+                        </div>
+                    </div>
+                    <div class="odd-item">
+                        <div class="odd-label">AI Will Replace You Entirely:</div>
+                        <div class="odd-value danger">
+                            <span id="replace-odds" class="rolling-number">0.0</span>%
+                        </div>
+                    </div>
+                    <div class="odd-item jackpot">
+                        <div class="odd-label">You Need to Upskill IMMEDIATELY:</div>
+                        <div class="odd-value critical">
+                            <span id="upskill-odds" class="rolling-number">0.0</span>%
+                        </div>
+                    </div>
+                </div>
+                <p class="odds-disclaimer">*These odds are 100% made up, just like most AI replacement predictions!</p>
+            </div>
+
+        </section>
+
+        <!-- Most Vulnerable Players Section -->
+        <section class="vulnerable-section card" aria-labelledby="vulnerable-heading">
+            <h2 id="vulnerable-heading" class="section-title">🎯 MOST VULNERABLE PLAYERS 🎯</h2>
+            <p class="section-description">See who's next in line for AI replacement!</p>
+
+            <div id="profile-carousel" class="profile-carousel">
+                <div class="profile-card" id="current-profile">
+                    <div class="profile-image-container">
+                        <img id="profile-image" src="" alt="" class="profile-image">
+                        <div class="risk-badge" id="risk-badge">HIGH RISK</div>
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="profile-name" class="profile-name"></h3>
+                        <p id="profile-title" class="profile-job"></p>
+                        <p id="profile-company" class="profile-company"></p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-label">Experience:</span>
+                                <span id="profile-experience" class="stat-value"></span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Last Upskill:</span>
+                                <span id="profile-upskill" class="stat-value"></span>
+                            </div>
+                            <div class="stat critical">
+                                <span class="stat-label">Replacement Probability:</span>
+                                <span id="profile-probability" class="stat-value"></span>
+                            </div>
+                            <div class="stat danger">
+                                <span class="stat-label">Days Remaining:</span>
+                                <span id="profile-days" class="stat-value"></span>
+                            </div>
+                        </div>
+                        <p id="profile-note" class="profile-note"></p>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prev-profile" class="carousel-btn" aria-label="Previous profile">◄</button>
+                    <div class="profile-counter">
+                        <span id="profile-current">1</span> / <span id="profile-total">10</span>
+                    </div>
+                    <button id="next-profile" class="carousel-btn" aria-label="Next profile">►</button>
+                </div>
+            </div>
+
+            <p class="disclaimer-small">All profiles are fictional. Any resemblance to real persons is purely coincidental.</p>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section card">
+            <h2 class="cta-heading">DON'T LET AI WIN!</h2>
+            <p class="cta-text">Start upskilling NOW before it's too late!</p>
+            <button id="cta-main" class="cta-button mega">START UPSKILLING NOW!</button>
+            <p class="cta-reveal hidden" id="cta-reveal">
+                Just kidding! This entire website is satire. AI predictions about job replacement are often
+                exaggerated and designed to create anxiety. Take a breath, focus on what you love doing,
+                and remember that humans bring irreplaceable creativity, empathy, and adaptability to their work.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p class="footer-text">
+            This is a satirical website. No actual predictions are being made.
+            All data is randomly generated for comedic effect.
+        </p>
+        <p class="footer-text">
+            Created to parody AI replacement anxiety and predatory upskilling marketing.
+        </p>
+        <p class="footer-links">
+            <a href="https://github.com/forpublicai/willihaveajob" target="_blank" rel="noopener noreferrer">
+                View Source on GitHub
+            </a>
+        </p>
+    </footer>
+
+    <!-- Popup Modal -->
+    <div id="popup-modal" class="popup-modal hidden" role="dialog" aria-labelledby="popup-title" aria-describedby="popup-message" aria-modal="true">
+        <div class="popup-content">
+            <button id="popup-close" class="popup-close" aria-label="Close popup">✕</button>
+            <h3 id="popup-title" class="popup-title"></h3>
+            <p id="popup-message" class="popup-message"></p>
+            <button id="popup-cta" class="popup-button">DISMISS</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/occupations.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/audio.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

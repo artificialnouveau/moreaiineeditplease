@@ -1,0 +1,872 @@
+/* ============================================
+   Will I Have A Job? - Main Styles
+   Garish Lottery Ticket Aesthetic
+   ============================================ */
+
+/* ============================================
+   CSS Variables - Color Palette
+   ============================================ */
+:root {
+    /* Primary Colors */
+    --lottery-gold: #FFD700;
+    --lottery-red: #FF0000;
+    --lottery-silver: #C0C0C0;
+    --lottery-blue: #0047AB;
+    --lottery-green: #00FF00;
+
+    /* Background Colors */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --bg-card: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-gold: var(--lottery-gold);
+    --text-danger: var(--lottery-red);
+
+    /* Metallic Gradients */
+    --gradient-gold: linear-gradient(145deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+    --gradient-silver: linear-gradient(145deg, #E8E8E8 0%, #C0C0C0 50%, #E8E8E8 100%);
+    --gradient-red: linear-gradient(145deg, #FF0000 0%, #CC0000 50%, #FF0000 100%);
+
+    /* Shadows */
+    --shadow-emboss:
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        -1px -1px 2px rgba(255, 255, 255, 0.3),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+    --shadow-card:
+        0 8px 16px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(255, 215, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    --shadow-mega:
+        0 12px 24px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(255, 215, 0, 0.5),
+        0 0 60px rgba(255, 215, 0, 0.3);
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ============================================
+   Accessibility - Hidden Elements
+   ============================================ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Accessibility - Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   Header Section
+   ============================================ */
+.main-header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    background: var(--bg-card);
+    border-bottom: 5px solid var(--lottery-gold);
+    box-shadow: var(--shadow-card);
+    position: relative;
+}
+
+.site-title {
+    margin-bottom: 1rem;
+}
+
+.mega-title {
+    display: block;
+    font-size: clamp(2rem, 8vw, 5rem);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        3px 3px 6px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.6);
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    display: block;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    color: var(--lottery-red);
+    text-shadow: var(--shadow-emboss);
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+.tagline {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    color: var(--text-gold);
+    margin: 1rem 0 0.5rem;
+    font-style: italic;
+}
+
+.disclaimer-small {
+    font-size: 0.75rem;
+    color: var(--lottery-silver);
+    opacity: 0.7;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+}
+
+/* ============================================
+   Main Container
+   ============================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ============================================
+   Card Styles
+   ============================================ */
+.card {
+    background: var(--bg-card);
+    border: 3px solid var(--lottery-gold);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-gold);
+}
+
+/* ============================================
+   Section Titles
+   ============================================ */
+.section-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-description {
+    text-align: center;
+    color: var(--lottery-silver);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   Search Section
+   ============================================ */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.occupation-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 3px solid var(--lottery-gold);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.occupation-input:focus {
+    outline: none;
+    border-color: var(--lottery-red);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.help-text {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--lottery-silver);
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    margin-top: 0.5rem;
+}
+
+/* ============================================
+   CTA Buttons
+   ============================================ */
+.cta-button {
+    background: var(--gradient-red);
+    color: white;
+    border: 3px solid var(--lottery-gold);
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: var(--shadow-emboss);
+    transition: all 0.3s ease;
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 1px;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-mega);
+}
+
+.cta-button:active {
+    transform: scale(0.98);
+}
+
+.cta-button.mega {
+    font-size: 1.5rem;
+    padding: 1.5rem 3rem;
+    animation: pulse 2s infinite;
+}
+
+/* ============================================
+   Results Section
+   ============================================ */
+.results-section {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.result-card {
+    border-color: var(--lottery-gold);
+}
+
+.result-title {
+    font-size: 1.8rem;
+    color: var(--lottery-gold);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: var(--shadow-emboss);
+}
+
+.occupation-display {
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 1rem;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+}
+
+.occupation-label {
+    color: var(--lottery-silver);
+    margin-right: 0.5rem;
+}
+
+.occupation-value {
+    color: var(--lottery-gold);
+    font-weight: 900;
+}
+
+/* ============================================
+   Countdown Timer
+   ============================================ */
+.countdown-card {
+    border-color: var(--lottery-red);
+    text-align: center;
+}
+
+.countdown-card.critical {
+    animation: blink-border 1s infinite;
+}
+
+.countdown-title {
+    font-size: 1.8rem;
+    color: var(--lottery-red);
+    margin-bottom: 1.5rem;
+    text-shadow: var(--shadow-emboss);
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.countdown-number {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    color: var(--lottery-silver);
+    margin-top: 0.25rem;
+    font-weight: normal;
+}
+
+.countdown-separator {
+    font-size: 2rem;
+    color: var(--lottery-gold);
+    align-self: flex-start;
+    padding-top: 0.5rem;
+}
+
+.obsolete-date,
+.ai-model {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    color: var(--lottery-silver);
+}
+
+.obsolete-date strong,
+.ai-model strong {
+    color: var(--lottery-gold);
+}
+
+.prediction-note {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid var(--lottery-red);
+    font-style: italic;
+    color: var(--lottery-silver);
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+}
+
+/* ============================================
+   Odds Calculator
+   ============================================ */
+.odds-title {
+    font-size: 1.8rem;
+    color: var(--lottery-gold);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: var(--shadow-emboss);
+}
+
+.odds-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.odd-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 2px solid var(--lottery-silver);
+}
+
+.odd-item.jackpot {
+    border-color: var(--lottery-red);
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.odd-label {
+    font-size: 1.1rem;
+    color: var(--lottery-silver);
+    flex: 1;
+}
+
+.odd-value {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--lottery-gold);
+    min-width: 120px;
+    text-align: right;
+}
+
+.odd-value.danger {
+    color: #FF6600;
+}
+
+.odd-value.critical {
+    color: var(--lottery-red);
+}
+
+.rolling-number {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.odds-disclaimer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--lottery-silver);
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* ============================================
+   Vulnerable Players Section
+   ============================================ */
+.profile-carousel {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--lottery-red);
+    border-radius: 12px;
+}
+
+.profile-image-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid var(--lottery-gold);
+    object-fit: cover;
+}
+
+.risk-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-red);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    border: 2px solid var(--lottery-gold);
+    white-space: nowrap;
+}
+
+.profile-info {
+    text-align: center;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    color: var(--lottery-gold);
+    margin-bottom: 0.5rem;
+}
+
+.profile-job {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.profile-company {
+    font-size: 0.9rem;
+    color: var(--lottery-silver);
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat {
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--lottery-silver);
+}
+
+.stat.critical {
+    border-color: var(--lottery-red);
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.stat.danger {
+    border-color: #FF6600;
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--lottery-silver);
+    margin-bottom: 0.25rem;
+    font-weight: normal;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--lottery-gold);
+    font-weight: 900;
+}
+
+.stat.critical .stat-value {
+    color: var(--lottery-red);
+}
+
+.stat.danger .stat-value {
+    color: #FF6600;
+}
+
+.profile-note {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid var(--lottery-red);
+    font-style: italic;
+    color: var(--lottery-silver);
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.carousel-btn {
+    background: var(--gradient-gold);
+    border: 2px solid var(--lottery-gold);
+    color: var(--bg-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 900;
+}
+
+.carousel-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.profile-counter {
+    font-size: 1.1rem;
+    color: var(--lottery-gold);
+    font-weight: 900;
+}
+
+/* ============================================
+   CTA Section
+   ============================================ */
+.cta-section {
+    text-align: center;
+    border-color: var(--lottery-red);
+    background: linear-gradient(135deg, #2d0000 0%, #1a0000 100%);
+}
+
+.cta-heading {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--lottery-red);
+    margin-bottom: 1rem;
+    text-shadow: var(--shadow-emboss);
+}
+
+.cta-text {
+    font-size: 1.3rem;
+    color: var(--lottery-gold);
+    margin-bottom: 2rem;
+}
+
+.cta-reveal {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--lottery-green);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.8;
+    color: var(--lottery-silver);
+    animation: fadeIn 0.5s ease;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.main-footer {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--lottery-gold);
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.footer-text {
+    color: var(--lottery-silver);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+}
+
+.footer-links {
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: var(--lottery-gold);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--lottery-red);
+    text-decoration: underline;
+}
+
+/* ============================================
+   Urgent Timer Banner
+   ============================================ */
+.urgent-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--gradient-red);
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 900;
+    z-index: 999;
+    border-bottom: 3px solid var(--lottery-gold);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.urgent-banner.blinking {
+    animation: blink-banner 1s infinite;
+}
+
+.warning-icon {
+    font-size: 1.2rem;
+    animation: shake 0.5s infinite;
+}
+
+/* ============================================
+   Audio Unlock Overlay
+   ============================================ */
+#audio-unlock-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.unlock-content {
+    text-align: center;
+    padding: 3rem;
+    background: var(--bg-card);
+    border: 5px solid var(--lottery-gold);
+    border-radius: 16px;
+    box-shadow: var(--shadow-mega);
+    max-width: 500px;
+}
+
+.unlock-content h2 {
+    font-size: 2.5rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: pulse 1.5s infinite;
+}
+
+.unlock-content p {
+    font-size: 1.2rem;
+    color: var(--lottery-silver);
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem 0.5rem;
+    }
+
+    .card {
+        padding: 1.5rem 1rem;
+    }
+
+    .countdown-display {
+        gap: 0.25rem;
+    }
+
+    .countdown-unit {
+        min-width: 60px;
+    }
+
+    .odd-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .odd-value {
+        text-align: center;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .search-container {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-separator {
+        display: none;
+    }
+
+    .countdown-display {
+        gap: 0.5rem;
+    }
+}
+
+/* ============================================
+   Animations (Simple)
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes blink-border {
+    0%, 100% {
+        border-color: var(--lottery-red);
+    }
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes blink-banner {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    75% {
+        transform: translateX(2px);
+    }
+}
