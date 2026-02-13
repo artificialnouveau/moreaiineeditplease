@@ -1,47 +1,40 @@
 /* ============================================
-   Will I Have A Job? - Main Styles
-   Garish Lottery Ticket Aesthetic
+   AI Services Store - Retail Style
+   Target/Walmart Inspired Design
    ============================================ */
 
 /* ============================================
-   CSS Variables - Color Palette
+   CSS Variables - Retail Color Palette
    ============================================ */
 :root {
-    /* Primary Colors */
-    --lottery-gold: #FFD700;
-    --lottery-red: #FF0000;
-    --lottery-silver: #C0C0C0;
-    --lottery-blue: #0047AB;
-    --lottery-green: #00FF00;
+    /* Primary Brand Colors - Target inspired */
+    --brand-red: #CC0000;
+    --brand-white: #FFFFFF;
+    --brand-gray: #F5F5F5;
 
     /* Background Colors */
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2a2a2a;
-    --bg-card: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F9F9F9;
+    --bg-section: #F5F5F5;
 
     /* Text Colors */
-    --text-primary: #FFFFFF;
-    --text-gold: var(--lottery-gold);
-    --text-danger: var(--lottery-red);
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-light: #999999;
 
-    /* Metallic Gradients */
-    --gradient-gold: linear-gradient(145deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-    --gradient-silver: linear-gradient(145deg, #E8E8E8 0%, #C0C0C0 50%, #E8E8E8 100%);
-    --gradient-red: linear-gradient(145deg, #FF0000 0%, #CC0000 50%, #FF0000 100%);
+    /* Accent Colors */
+    --accent-blue: #0073CF;
+    --accent-green: #008300;
+    --accent-orange: #FF6200;
+
+    /* Borders */
+    --border-color: #E0E0E0;
+    --border-light: #F0F0F0;
 
     /* Shadows */
-    --shadow-emboss:
-        2px 2px 4px rgba(0, 0, 0, 0.8),
-        -1px -1px 2px rgba(255, 255, 255, 0.3),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.2);
-    --shadow-card:
-        0 8px 16px rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(255, 215, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    --shadow-mega:
-        0 12px 24px rgba(0, 0, 0, 0.8),
-        0 0 40px rgba(255, 215, 0, 0.5),
-        0 0 60px rgba(255, 215, 0, 0.3);
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ============================================
@@ -59,16 +52,15 @@ html {
 }
 
 body {
-    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
-    position: relative;
 }
 
 /* ============================================
-   Accessibility - Hidden Elements
+   Accessibility
    ============================================ */
 .visually-hidden {
     position: absolute;
@@ -87,915 +79,278 @@ body {
 }
 
 /* ============================================
-   Accessibility - Reduced Motion
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* ============================================
-   Header Section
+   Header & Navigation
    ============================================ */
 .main-header {
-    text-align: center;
-    padding: 3rem 1rem 2rem;
-    background: var(--bg-card);
-    border-bottom: 5px solid var(--lottery-gold);
+    background: var(--brand-red);
+    color: var(--brand-white);
+    padding: 1rem 0;
     box-shadow: var(--shadow-card);
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .site-title {
-    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
 .mega-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     display: block;
-    font-size: clamp(2rem, 8vw, 5rem);
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow:
-        3px 3px 6px rgba(0, 0, 0, 0.8),
-        0 0 20px rgba(255, 215, 0, 0.6);
-    letter-spacing: 2px;
-    font-weight: 900;
-    text-transform: uppercase;
 }
 
 .subtitle {
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.95;
     display: block;
-    font-size: clamp(1rem, 3vw, 1.8rem);
-    color: var(--lottery-red);
-    text-shadow: var(--shadow-emboss);
-    margin-top: 0.5rem;
-    font-weight: bold;
+    margin-top: 0.25rem;
 }
 
 .tagline {
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    color: var(--text-gold);
-    margin: 1rem 0 0.5rem;
-    font-style: italic;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.5rem 0 0.25rem;
 }
 
 .disclaimer-small {
+    text-align: center;
     font-size: 0.75rem;
-    color: var(--lottery-silver);
-    opacity: 0.7;
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-}
-
-/* ============================================
-   Main Container
-   ============================================ */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
-/* ============================================
-   Card Styles
-   ============================================ */
-.card {
-    background: var(--bg-card);
-    border: 3px solid var(--lottery-gold);
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: var(--gradient-gold);
-}
-
-/* ============================================
-   Section Titles
-   ============================================ */
-.section-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-align: center;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.section-description {
-    text-align: center;
-    color: var(--lottery-silver);
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-}
-
-/* ============================================
-   Search Section
-   ============================================ */
-.search-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.occupation-input {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    border: 3px solid var(--lottery-gold);
-    border-radius: 8px;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    font-family: Arial, sans-serif;
-    transition: all 0.3s ease;
-}
-
-.occupation-input:focus {
-    outline: none;
-    border-color: var(--lottery-red);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-.help-text {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--lottery-silver);
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-    margin-top: 0.5rem;
-}
-
-/* ============================================
-   CTA Buttons
-   ============================================ */
-.cta-button {
-    background: var(--gradient-red);
-    color: white;
-    border: 3px solid var(--lottery-gold);
-    border-radius: 8px;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: var(--shadow-emboss);
-    transition: all 0.3s ease;
-    font-family: 'Arial Black', sans-serif;
-    letter-spacing: 1px;
-}
-
-.cta-button:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-mega);
-}
-
-.cta-button:active {
-    transform: scale(0.98);
-}
-
-.cta-button.mega {
-    font-size: 1.5rem;
-    padding: 1.5rem 3rem;
-    animation: pulse 2s infinite;
-}
-
-/* ============================================
-   Results Section
-   ============================================ */
-.results-section {
-    animation: fadeIn 0.5s ease-in;
-}
-
-.result-card {
-    border-color: var(--lottery-gold);
-}
-
-.result-title {
-    font-size: 1.8rem;
-    color: var(--lottery-gold);
-    text-align: center;
-    margin-bottom: 1.5rem;
-    text-shadow: var(--shadow-emboss);
-}
-
-.occupation-display {
-    text-align: center;
-    font-size: 1.3rem;
-    padding: 1rem;
-    background: rgba(255, 215, 0, 0.1);
-    border-radius: 8px;
-}
-
-.occupation-label {
-    color: var(--lottery-silver);
-    margin-right: 0.5rem;
-}
-
-.occupation-value {
-    color: var(--lottery-gold);
-    font-weight: 900;
-}
-
-/* ============================================
-   Countdown Timer
-   ============================================ */
-.countdown-card {
-    border-color: var(--lottery-red);
-    text-align: center;
-}
-
-.countdown-card.critical {
-    animation: blink-border 1s infinite;
-}
-
-.countdown-title {
-    font-size: 1.8rem;
-    color: var(--lottery-red);
-    margin-bottom: 1.5rem;
-    text-shadow: var(--shadow-emboss);
-}
-
-.countdown-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.countdown-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 80px;
-}
-
-.countdown-number {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 900;
-    line-height: 1;
-}
-
-.countdown-label {
-    font-size: 0.75rem;
-    color: var(--lottery-silver);
-    margin-top: 0.25rem;
-    font-weight: normal;
-}
-
-.countdown-separator {
-    font-size: 2rem;
-    color: var(--lottery-gold);
-    align-self: flex-start;
-    padding-top: 0.5rem;
-}
-
-.obsolete-date,
-.ai-model {
-    margin: 1rem 0;
-    font-size: 1.1rem;
-    color: var(--lottery-silver);
-}
-
-.obsolete-date strong,
-.ai-model strong {
-    color: var(--lottery-gold);
-}
-
-.prediction-note {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: rgba(255, 0, 0, 0.1);
-    border-left: 4px solid var(--lottery-red);
-    font-style: italic;
-    color: var(--lottery-silver);
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-}
-
-/* ============================================
-   Odds Calculator
-   ============================================ */
-.odds-title {
-    font-size: 1.8rem;
-    color: var(--lottery-gold);
-    text-align: center;
-    margin-bottom: 1.5rem;
-    text-shadow: var(--shadow-emboss);
-}
-
-.odds-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.odd-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    border: 2px solid var(--lottery-silver);
-}
-
-.odd-item.jackpot {
-    border-color: var(--lottery-red);
-    background: rgba(255, 0, 0, 0.1);
-}
-
-.odd-label {
-    font-size: 1.1rem;
-    color: var(--lottery-silver);
-    flex: 1;
-}
-
-.odd-value {
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--lottery-gold);
-    min-width: 120px;
-    text-align: right;
-}
-
-.odd-value.danger {
-    color: #FF6600;
-}
-
-.odd-value.critical {
-    color: var(--lottery-red);
-}
-
-.rolling-number {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.odds-disclaimer {
-    margin-top: 1.5rem;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--lottery-silver);
-    font-family: Arial, sans-serif;
-    font-weight: normal;
     opacity: 0.8;
 }
 
 /* ============================================
-   Vulnerable Players Section
-   ============================================ */
-.profile-carousel {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.profile-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid var(--lottery-red);
-    border-radius: 12px;
-}
-
-.profile-image-container {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-}
-
-.profile-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 4px solid var(--lottery-gold);
-    object-fit: cover;
-}
-
-.risk-badge {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--gradient-red);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 900;
-    border: 2px solid var(--lottery-gold);
-    white-space: nowrap;
-}
-
-.profile-info {
-    text-align: center;
-}
-
-.profile-name {
-    font-size: 1.5rem;
-    color: var(--lottery-gold);
-    margin-bottom: 0.5rem;
-}
-
-.profile-job {
-    font-size: 1.1rem;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-}
-
-.profile-company {
-    font-size: 0.9rem;
-    color: var(--lottery-silver);
-    margin-bottom: 1rem;
-    font-weight: normal;
-}
-
-.profile-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
-
-.stat {
-    padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid var(--lottery-silver);
-}
-
-.stat.critical {
-    border-color: var(--lottery-red);
-    background: rgba(255, 0, 0, 0.1);
-}
-
-.stat.danger {
-    border-color: #FF6600;
-    background: rgba(255, 102, 0, 0.1);
-}
-
-.stat-label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--lottery-silver);
-    margin-bottom: 0.25rem;
-    font-weight: normal;
-}
-
-.stat-value {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--lottery-gold);
-    font-weight: 900;
-}
-
-.stat.critical .stat-value {
-    color: var(--lottery-red);
-}
-
-.stat.danger .stat-value {
-    color: #FF6600;
-}
-
-.profile-note {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: rgba(255, 0, 0, 0.1);
-    border-left: 4px solid var(--lottery-red);
-    font-style: italic;
-    color: var(--lottery-silver);
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-    font-size: 0.9rem;
-    text-align: left;
-}
-
-.carousel-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 1.5rem;
-}
-
-.carousel-btn {
-    background: var(--gradient-gold);
-    border: 2px solid var(--lottery-gold);
-    color: var(--bg-primary);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 900;
-}
-
-.carousel-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-.profile-counter {
-    font-size: 1.1rem;
-    color: var(--lottery-gold);
-    font-weight: 900;
-}
-
-/* ============================================
-   CTA Section
-   ============================================ */
-.cta-section {
-    text-align: center;
-    border-color: var(--lottery-red);
-    background: linear-gradient(135deg, #2d0000 0%, #1a0000 100%);
-}
-
-.cta-heading {
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: var(--lottery-red);
-    margin-bottom: 1rem;
-    text-shadow: var(--shadow-emboss);
-}
-
-.cta-text {
-    font-size: 1.3rem;
-    color: var(--lottery-gold);
-    margin-bottom: 2rem;
-}
-
-.cta-reveal {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid var(--lottery-green);
-    border-radius: 8px;
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-    line-height: 1.8;
-    color: var(--lottery-silver);
-    animation: fadeIn 0.5s ease;
-}
-
-/* ============================================
-   Footer
-   ============================================ */
-.main-footer {
-    background: var(--bg-secondary);
-    border-top: 3px solid var(--lottery-gold);
-    padding: 2rem 1rem;
-    text-align: center;
-}
-
-.footer-text {
-    color: var(--lottery-silver);
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-}
-
-.footer-links {
-    margin-top: 1rem;
-}
-
-.footer-links a {
-    color: var(--lottery-gold);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--lottery-red);
-    text-decoration: underline;
-}
-
-/* ============================================
-   Urgent Timer Banner
+   Banner & Promotions
    ============================================ */
 .urgent-banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: var(--gradient-red);
-    color: white;
+    background: var(--accent-orange);
+    color: var(--brand-white);
     padding: 0.75rem;
     text-align: center;
-    font-weight: 900;
-    z-index: 999;
-    border-bottom: 3px solid var(--lottery-gold);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.urgent-banner.blinking {
-    animation: blink-banner 1s infinite;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .warning-icon {
-    font-size: 1.2rem;
-    animation: shake 0.5s infinite;
+    margin: 0 0.5rem;
 }
 
 /* ============================================
-   Audio Unlock Overlay
+   Container & Layout
    ============================================ */
-#audio-unlock-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
-.unlock-content {
-    text-align: center;
-    padding: 3rem;
-    background: var(--bg-card);
-    border: 5px solid var(--lottery-gold);
-    border-radius: 16px;
-    box-shadow: var(--shadow-mega);
-    max-width: 500px;
-}
-
-.unlock-content h2 {
-    font-size: 2.5rem;
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1rem;
-    animation: pulse 1.5s infinite;
-}
-
-.unlock-content p {
-    font-size: 1.2rem;
-    color: var(--lottery-silver);
+.card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2rem;
     margin-bottom: 2rem;
+    box-shadow: var(--shadow-subtle);
 }
 
 /* ============================================
-   Responsive Design
-   ============================================ */
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem 0.5rem;
-    }
-
-    .card {
-        padding: 1.5rem 1rem;
-    }
-
-    .countdown-display {
-        gap: 0.25rem;
-    }
-
-    .countdown-unit {
-        min-width: 60px;
-    }
-
-    .odd-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-    }
-
-    .odd-value {
-        text-align: center;
-    }
-
-    .profile-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .search-container {
-        padding: 0 0.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .countdown-separator {
-        display: none;
-    }
-
-    .countdown-display {
-        gap: 0.5rem;
-    }
-}
-
-/* ============================================
-   Animations (Simple)
-   ============================================ */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-@keyframes blink-border {
-    0%, 100% {
-        border-color: var(--lottery-red);
-    }
-    50% {
-        border-color: transparent;
-    }
-}
-
-@keyframes blink-banner {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.8;
-    }
-}
-
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-2px);
-    }
-    75% {
-        transform: translateX(2px);
-    }
-}
-
-/* ============================================
-   Tabs Section
+   Department Navigation (Tabs)
    ============================================ */
 .tabs-section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     margin-bottom: 2rem;
+    padding: 1rem;
 }
 
 .tabs-container {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .tab-button {
     flex: 1;
-    min-width: 150px;
-    padding: 1rem 1.5rem;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 1rem;
-    font-weight: 900;
+    min-width: 140px;
+    padding: 0.875rem 1.25rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-transform: uppercase;
-    border: 3px solid var(--lottery-gold);
-    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    background: var(--brand-white);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-emboss);
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
 .tab-button:hover {
-    background: var(--gradient-gold);
-    color: #000;
-    transform: scale(1.05);
-    box-shadow: var(--shadow-mega);
+    background: var(--bg-section);
+    border-color: var(--brand-red);
 }
 
 .tab-button.active {
-    background: var(--gradient-gold);
-    color: #000;
-    border-color: var(--lottery-red);
-    box-shadow: var(--shadow-mega);
+    background: var(--brand-red);
+    color: var(--brand-white);
+    border-color: var(--brand-red);
 }
 
 .tab-content {
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* ============================================
-   Personas Grid
+   Section Headers
    ============================================ */
-.personas-grid {
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Product Grid (Services)
+   ============================================ */
+.personas-grid,
+.automation-grid,
+.companions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
     margin-top: 2rem;
 }
 
-.persona-card {
-    background: var(--bg-card);
-    border: 3px solid var(--lottery-gold);
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
+/* Product Card */
+.persona-card,
+.automation-item,
+.companion-item {
+    background: var(--brand-white);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-subtle);
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
 }
 
-.persona-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    border-color: var(--lottery-red);
-    box-shadow: var(--shadow-mega);
+.persona-card:hover,
+.automation-item:hover,
+.companion-item:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--brand-red);
+    transform: translateY(-2px);
 }
 
-.persona-icon {
-    font-size: 4rem;
+.persona-icon,
+.automation-icon,
+.companion-icon {
+    font-size: 3rem;
     margin-bottom: 1rem;
-    animation: pulse 2s infinite;
+    text-align: center;
 }
 
-.persona-name {
-    font-size: 1.5rem;
-    color: var(--lottery-gold);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
+.persona-name,
+.automation-title,
+.companion-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    text-align: center;
 }
 
+.automation-desc,
+.companion-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Product Price Badge */
+.product-price {
+    display: inline-block;
+    background: var(--accent-green);
+    color: var(--brand-white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--brand-red);
+    color: var(--brand-white);
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: auto;
+}
+
+.add-to-cart-btn:hover {
+    background: #A00000;
+}
+
+/* Persona Cards - Hover Info */
 .persona-hover-info {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
     transition: all 0.3s ease;
+    margin-top: 0;
 }
 
 .persona-card:hover .persona-hover-info {
     opacity: 1;
-    max-height: 500px;
+    max-height: 400px;
+    margin-top: 1rem;
 }
 
 .service-list {
     list-style: none;
     text-align: left;
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    margin-top: 1rem;
+    background: var(--bg-section);
+    border-radius: 4px;
+    font-size: 0.85rem;
 }
 
 .service-list li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-secondary);
 }
 
 .service-list li:last-child {
@@ -1003,232 +358,25 @@ body {
 }
 
 .service-list li::before {
-    content: '✨ ';
-    color: var(--lottery-gold);
+    content: '• ';
+    color: var(--brand-red);
+    font-weight: bold;
 }
 
 /* ============================================
-   Automation Grid
+   Sale Badges
    ============================================ */
-.automation-grid,
-.companions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.automation-item,
-.companion-item {
-    background: var(--bg-card);
-    border: 2px solid var(--lottery-silver);
-    padding: 1.5rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.automation-item:hover,
-.companion-item:hover {
-    border-color: var(--lottery-gold);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-card);
-}
-
-.automation-icon,
-.companion-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.automation-title,
-.companion-title {
-    font-size: 1.3rem;
-    color: var(--lottery-gold);
-    margin-bottom: 0.5rem;
+.sale-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent-orange);
+    color: var(--brand-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.75rem;
     text-transform: uppercase;
-}
-
-.automation-desc,
-.companion-desc {
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    line-height: 1.5;
-}
-
-/* ============================================
-   Mystery Box
-   ============================================ */
-.mystery-card {
-    min-height: 500px;
-}
-
-.mystery-box-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem;
-}
-
-.mystery-box {
-    background: var(--gradient-gold);
-    border: 5px solid var(--lottery-red);
-    padding: 3rem;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-mega);
-    animation: float 3s ease-in-out infinite;
-}
-
-.mystery-box:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
-}
-
-.mystery-box-icon {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-}
-
-.mystery-box-text {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #000;
-    text-transform: uppercase;
-}
-
-.mystery-box-subtext {
-    font-size: 1rem;
-    color: #333;
-    margin-top: 0.5rem;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-.mystery-result {
-    padding: 2rem;
-    text-align: center;
-    animation: fadeIn 0.5s ease;
-}
-
-.mystery-result-content {
-    background: var(--bg-card);
-    border: 3px solid var(--lottery-gold);
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow-card);
-}
-
-.mystery-result-icon {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    animation: bounce 1s ease;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-30px);
-    }
-}
-
-.mystery-result-title {
-    font-size: 2rem;
-    color: var(--lottery-gold);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.mystery-result-desc {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
-.mystery-history {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-.mystery-history-title {
-    font-size: 1.3rem;
-    color: var(--lottery-gold);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.mystery-history-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.mystery-history-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem;
-    background: var(--bg-secondary);
-    border: 1px solid var(--lottery-silver);
-    border-radius: 5px;
-}
-
-.history-icon {
-    font-size: 1.5rem;
-}
-
-.history-title {
-    font-size: 0.9rem;
-}
-
-.mystery-history-empty {
-    text-align: center;
-    color: var(--lottery-silver);
-    font-style: italic;
-}
-
-/* ============================================
-   Responsive Design
-   ============================================ */
-@media (max-width: 768px) {
-    .tabs-container {
-        flex-direction: column;
-    }
-
-    .tab-button {
-        min-width: 100%;
-    }
-
-    .personas-grid,
-    .automation-grid,
-    .companions-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .mystery-box {
-        padding: 2rem;
-    }
-
-    .mystery-box-icon {
-        font-size: 4rem;
-    }
-
-    .mystery-box-text {
-        font-size: 1.5rem;
-    }
 }
 
 /* ============================================
@@ -1236,58 +384,53 @@ body {
    ============================================ */
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    margin: 3rem 0;
+    margin: 2rem 0;
 }
 
 .pricing-card {
-    background: var(--bg-card);
-    border: 3px solid var(--lottery-silver);
+    background: var(--brand-white);
+    border: 2px solid var(--border-color);
     padding: 2rem;
-    border-radius: 15px;
+    border-radius: 4px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: var(--shadow-card);
-    position: relative;
 }
 
 .pricing-card.featured {
-    border-color: var(--lottery-gold);
-    border-width: 5px;
-    transform: scale(1.05);
-    box-shadow: var(--shadow-mega);
+    border-color: var(--brand-red);
+    border-width: 3px;
+    position: relative;
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-mega);
-}
-
-.pricing-card.featured:hover {
-    transform: translateY(-10px) scale(1.08);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
 }
 
 .pricing-badge {
-    background: var(--lottery-silver);
-    color: #000;
+    background: var(--accent-green);
+    color: var(--brand-white);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 900;
+    font-size: 0.75rem;
+    font-weight: 700;
     display: inline-block;
     margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
 .pricing-badge.premium {
-    background: var(--gradient-gold);
-    animation: pulse 2s infinite;
+    background: var(--brand-red);
 }
 
 .pricing-tier {
-    font-size: 2rem;
-    color: var(--lottery-gold);
+    font-size: 1.75rem;
+    color: var(--text-primary);
     margin-bottom: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
@@ -1296,27 +439,28 @@ body {
 }
 
 .price-amount {
-    font-size: 3.5rem;
-    font-weight: 900;
+    font-size: 3rem;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
 .price-period {
-    font-size: 1.2rem;
-    color: var(--lottery-silver);
+    font-size: 1rem;
+    color: var(--text-secondary);
 }
 
 .pricing-annual {
-    font-size: 1rem;
-    color: var(--lottery-gold);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
 }
 
 .savings {
-    background: var(--lottery-red);
+    background: var(--accent-orange);
+    color: var(--brand-white);
     padding: 0.25rem 0.5rem;
-    border-radius: 5px;
-    font-weight: 900;
+    border-radius: 3px;
+    font-weight: 700;
     margin-left: 0.5rem;
 }
 
@@ -1329,7 +473,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .feature:last-child {
@@ -1344,93 +488,93 @@ body {
     font-size: 1.2rem;
     margin-right: 1rem;
     min-width: 20px;
-    color: var(--lottery-gold);
+    color: var(--accent-green);
+    font-weight: bold;
 }
 
 .feature.disabled .feature-icon {
-    color: var(--lottery-silver);
+    color: var(--text-light);
 }
 
 .feature-text {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 }
 
 .pricing-button {
     width: 100%;
     padding: 1rem 2rem;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 900;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    border: 3px solid var(--lottery-gold);
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    border: 2px solid var(--brand-red);
+    background: var(--brand-white);
+    color: var(--brand-red);
     cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    border-radius: 4px;
+    transition: all 0.2s ease;
     margin-top: 1rem;
 }
 
 .pricing-button:hover {
-    background: var(--gradient-gold);
-    color: #000;
-    transform: scale(1.05);
-    box-shadow: var(--shadow-emboss);
+    background: var(--brand-red);
+    color: var(--brand-white);
 }
 
 .pricing-button.premium {
-    background: var(--gradient-gold);
-    color: #000;
-    border-color: var(--lottery-red);
+    background: var(--brand-red);
+    color: var(--brand-white);
 }
 
 .pricing-button.premium:hover {
-    background: var(--gradient-red);
-    color: #fff;
-    transform: scale(1.1);
+    background: #A00000;
 }
 
 /* Comparison Table */
 .pricing-comparison {
-    margin: 4rem 0;
+    margin: 3rem 0;
 }
 
 .comparison-title {
-    font-size: 1.8rem;
-    color: var(--lottery-gold);
+    font-size: 1.5rem;
+    color: var(--text-primary);
     text-align: center;
     margin-bottom: 2rem;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
 .comparison-table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--brand-white);
+    border: 1px solid var(--border-color);
 }
 
 .comparison-table th,
 .comparison-table td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .comparison-table th {
-    background: var(--bg-secondary);
-    color: var(--lottery-gold);
-    font-size: 1.1rem;
+    background: var(--bg-section);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
 .comparison-table .premium-col {
-    background: rgba(255, 215, 0, 0.1);
-    font-weight: bold;
-    color: var(--lottery-gold);
+    background: #FFF0F0;
+    font-weight: 600;
+    color: var(--brand-red);
 }
 
 .comparison-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-section);
 }
 
 /* FAQ Section */
@@ -1439,44 +583,288 @@ body {
 }
 
 .faq-title {
-    font-size: 1.8rem;
-    color: var(--lottery-gold);
+    font-size: 1.5rem;
+    color: var(--text-primary);
     text-align: center;
     margin-bottom: 2rem;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
 .faq-item {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--bg-section);
     padding: 1.5rem;
     margin-bottom: 1rem;
-    border-radius: 10px;
-    border-left: 4px solid var(--lottery-gold);
+    border-radius: 4px;
+    border-left: 4px solid var(--brand-red);
 }
 
 .faq-question {
-    font-size: 1.2rem;
-    color: var(--lottery-gold);
+    font-size: 1.1rem;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .faq-answer {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     line-height: 1.6;
 }
 
-/* Responsive Pricing */
+/* ============================================
+   Mystery Box
+   ============================================ */
+.mystery-card {
+    min-height: 400px;
+}
+
+.mystery-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.mystery-box {
+    background: var(--brand-red);
+    border: 3px solid var(--text-primary);
+    padding: 3rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-card);
+}
+
+.mystery-box:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
+.mystery-box-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.mystery-box-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brand-white);
+    text-transform: uppercase;
+}
+
+.mystery-box-subtext {
+    font-size: 1rem;
+    color: var(--brand-white);
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+.mystery-result {
+    padding: 2rem;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.mystery-result-content {
+    background: var(--bg-section);
+    border: 2px solid var(--border-color);
+    padding: 3rem;
+    border-radius: 8px;
+}
+
+.mystery-result-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.mystery-result-title {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.mystery-result-desc {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.mystery-history {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--bg-section);
+    border-radius: 4px;
+}
+
+.mystery-history-title {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.mystery-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mystery-history-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--brand-white);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.history-icon {
+    font-size: 1.5rem;
+}
+
+.history-title {
+    font-size: 0.9rem;
+}
+
+.mystery-history-empty {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* ============================================
+   CTA Section
+   ============================================ */
+.cta-section {
+    background: var(--bg-section);
+    text-align: center;
+    padding: 3rem 2rem;
+    border: 2px solid var(--border-color);
+}
+
+.cta-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    padding: 1rem 3rem;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    background: var(--brand-red);
+    color: var(--brand-white);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-card);
+}
+
+.cta-button:hover {
+    background: #A00000;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.cta-button.mega {
+    font-size: 1.25rem;
+    padding: 1.25rem 3.5rem;
+}
+
+.cta-reveal {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.main-footer {
+    background: var(--text-primary);
+    color: var(--brand-white);
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.footer-links a {
+    color: var(--brand-white);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid var(--brand-white);
+    padding-bottom: 2px;
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
 @media (max-width: 768px) {
-    .pricing-grid {
+    .mega-title {
+        font-size: 1.5rem;
+    }
+
+    .tabs-container {
+        flex-direction: column;
+    }
+
+    .tab-button {
+        min-width: 100%;
+    }
+
+    .personas-grid,
+    .automation-grid,
+    .companions-grid {
         grid-template-columns: 1fr;
     }
 
-    .pricing-card.featured {
-        transform: scale(1);
-    }
-
-    .price-amount {
-        font-size: 2.5rem;
+    .pricing-grid {
+        grid-template-columns: 1fr;
     }
 
     .comparison-table {
@@ -1487,4 +875,57 @@ body {
     .comparison-table td {
         padding: 0.75rem 0.5rem;
     }
+
+    .mystery-box {
+        padding: 2rem;
+    }
+
+    .mystery-box-text {
+        font-size: 1.5rem;
+    }
+
+    .cta-button.mega {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
+}
+
+/* ============================================
+   Audio Unlock Overlay
+   ============================================ */
+#audio-unlock-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.unlock-content {
+    background: var(--brand-white);
+    padding: 3rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+}
+
+#audio-unlock-btn {
+    margin-top: 1rem;
+}
+
+/* Sparkles and Confetti */
+#sparkle-container,
+#confetti-canvas {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
 }
