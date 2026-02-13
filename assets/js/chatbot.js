@@ -226,7 +226,7 @@ function addMessage(text, sender) {
     if (sender === 'bot') {
         const avatar = document.createElement('div');
         avatar.className = 'message-avatar';
-        avatar.textContent = '🤖';
+        avatar.innerHTML = '<i class="fas fa-robot"></i>';
         messageDiv.appendChild(avatar);
     }
 

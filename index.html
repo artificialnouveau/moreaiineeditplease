@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="More AI ! I Need It! Please! - Discover absurd and delightful AI applications you never knew you needed!">
-    <title>MORE AI ! I NEED IT! PLEASE! 🤖</title>
+    <title>MORE AI ! I NEED IT! PLEASE!</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/popup.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <!-- Sparkle Container (for animated sparkles) -->
@@ -21,7 +24,7 @@
     <!-- Audio Unlock Overlay -->
     <div id="audio-unlock-overlay" class="hidden" role="dialog" aria-labelledby="audio-unlock-title" aria-describedby="audio-unlock-desc">
         <div class="unlock-content">
-            <h2 id="audio-unlock-title">🤖 CLICK TO EXPLORE! 🤖</h2>
+            <h2 id="audio-unlock-title"><i class="fas fa-robot"></i> CLICK TO EXPLORE! <i class="fas fa-robot"></i></h2>
             <p id="audio-unlock-desc">Activate your full AI experience!</p>
             <button id="audio-unlock-btn" class="cta-button">LET'S GO!</button>
         </div>
@@ -29,9 +32,9 @@
 
     <!-- Fake Urgent Timer Banner -->
     <div id="urgent-timer-banner" class="urgent-banner" role="status" aria-live="polite">
-        <span class="warning-icon">✨</span>
+        <span class="warning-icon"><i class="fas fa-bolt"></i></span>
         <span id="urgent-timer-text">NEW AI SERVICES DROPPING IN: <strong id="urgent-countdown">00:00</strong></span>
-        <span class="warning-icon">✨</span>
+        <span class="warning-icon"><i class="fas fa-bolt"></i></span>
     </div>
 
     <!-- Main Header -->
@@ -52,19 +55,19 @@
         <!-- Category Tabs -->
         <section class="tabs-section card">
             <div class="tabs-container">
-                <button class="tab-button active" data-tab="automation">⚙️ AUTOMATION</button>
-                <button class="tab-button" data-tab="companions">💬 COMPANIONS</button>
-                <button class="tab-button" data-tab="therapists">🧠 SPECIALIZED THERAPISTS</button>
-                <button class="tab-button" data-tab="mystery">🎲 MYSTERY BOX</button>
-                <button class="tab-button" data-tab="pricing">💎 PRICING</button>
-                <button class="tab-button" data-tab="reviews">⭐ REVIEWS</button>
+                <button class="tab-button active" data-tab="automation"><i class="fas fa-robot"></i> AUTOMATION</button>
+                <button class="tab-button" data-tab="companions"><i class="fas fa-comments"></i> COMPANIONS</button>
+                <button class="tab-button" data-tab="therapists"><i class="fas fa-brain"></i> SPECIALIZED THERAPISTS</button>
+                <button class="tab-button" data-tab="mystery"><i class="fas fa-gift"></i> MYSTERY BOX</button>
+                <button class="tab-button" data-tab="pricing"><i class="fas fa-gem"></i> PRICING</button>
+                <button class="tab-button" data-tab="reviews"><i class="fas fa-star"></i> REVIEWS</button>
             </div>
         </section>
 
         <!-- AUTOMATION TAB -->
         <section id="automation-tab" class="tab-content active">
             <div class="card">
-                <h2 class="section-title">⚙️ AI AUTOMATION</h2>
+                <h2 class="section-title"><i class="fas fa-robot"></i> AI AUTOMATION</h2>
                 <p class="section-description">Let AI handle life's most awkward moments!</p>
 
                 <div class="automation-grid">
@@ -186,7 +189,7 @@
         <!-- COMPANIONS TAB -->
         <section id="companions-tab" class="tab-content hidden">
             <div class="card">
-                <h2 class="section-title">💬 AI COMPANIONS</h2>
+                <h2 class="section-title"><i class="fas fa-comments"></i> AI COMPANIONS</h2>
                 <p class="section-description">Your personal AI support squad for everyday life! Hover over persona cards to see their services.</p>
 
                 <!-- Persona Cards -->
@@ -368,7 +371,7 @@
         <!-- SPECIALIZED THERAPISTS TAB -->
         <section id="therapists-tab" class="tab-content hidden">
             <div class="card">
-                <h2 class="section-title">🧠 SPECIALIZED THERAPISTS</h2>
+                <h2 class="section-title"><i class="fas fa-brain"></i> SPECIALIZED THERAPISTS</h2>
                 <p class="section-description">Expert AI therapists for your mind, emotions, and reality!</p>
 
                 <div class="automation-grid">
@@ -518,7 +521,7 @@
         <!-- PRICING TAB -->
         <section id="pricing-tab" class="tab-content hidden">
             <div class="card">
-                <h2 class="section-title">💎 PRICING</h2>
+                <h2 class="section-title"><i class="fas fa-gem"></i> PRICING</h2>
                 <p class="section-description">Choose the plan that unleashes your AI potential!</p>
 
                 <div class="pricing-grid">
@@ -673,7 +676,7 @@
         <!-- REVIEWS TAB -->
         <section id="reviews-tab" class="tab-content hidden">
             <div class="card">
-                <h2 class="section-title">⭐ CUSTOMER REVIEWS</h2>
+                <h2 class="section-title"><i class="fas fa-star"></i> CUSTOMER REVIEWS</h2>
                 <p class="section-description">Help us improve! Rate our AI services and share your feedback.</p>
 
                 <!-- Service Selector -->
@@ -769,7 +772,7 @@
         <!-- MYSTERY BOX TAB -->
         <section id="mystery-tab" class="tab-content hidden">
             <div class="card mystery-card">
-                <h2 class="section-title">🎲 MYSTERY BOX ALGORITHM</h2>
+                <h2 class="section-title"><i class="fas fa-gift"></i> MYSTERY BOX ALGORITHM</h2>
                 <p class="section-description">Feeling lucky? Click the box to discover a random AI service!</p>
 
                 <div class="mystery-box-container">
@@ -830,18 +833,18 @@
     <!-- AI Assistant Chatbot -->
     <div id="chatbot-widget" class="chatbot-widget">
         <div id="chatbot-button" class="chatbot-button">
-            <span class="chatbot-icon">💬</span>
+            <span class="chatbot-icon"><i class="fas fa-comments"></i></span>
             <span class="chatbot-label">AI Helper</span>
         </div>
 
         <div id="chatbot-window" class="chatbot-window hidden">
             <div class="chatbot-header">
                 <h3>AI Service Advisor</h3>
-                <button id="chatbot-close" class="chatbot-close-btn">✕</button>
+                <button id="chatbot-close" class="chatbot-close-btn"><i class="fas fa-times"></i></button>
             </div>
             <div class="chatbot-messages" id="chatbot-messages">
                 <div class="bot-message">
-                    <div class="message-avatar">🤖</div>
+                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
                     <div class="message-content">
                         Hi! I'm your AI Service Advisor. Tell me what you need help with, and I'll recommend the perfect AI services for you!
                     </div>
