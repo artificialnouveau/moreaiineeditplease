@@ -1,22 +1,20 @@
 /**
- * Firebase Configuration
+ * Firebase Configuration - Firestore Edition
  *
  * SETUP INSTRUCTIONS:
  * 1. Go to https://console.firebase.google.com/
- * 2. Create a new project (or use existing)
- * 3. Click "Add app" and choose Web (</>)
- * 4. Register your app
- * 5. Copy the firebaseConfig object
- * 6. Replace the config below with your values
- * 7. In Firebase console, go to "Realtime Database" and click "Create Database"
- * 8. Start in "test mode" for now (you can secure it later)
+ * 2. Select your project
+ * 3. Click the gear icon → Project settings
+ * 4. Scroll down to "Your apps" and copy the firebaseConfig
+ * 5. Replace the config below with your values
+ * 6. In Firebase console, go to "Firestore Database"
+ * 7. Set up security rules (see FIREBASE_SETUP.md)
  */
 
 // TODO: Replace with your Firebase config
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
     projectId: "YOUR_PROJECT_ID",
     storageBucket: "YOUR_PROJECT_ID.appspot.com",
     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
@@ -25,14 +23,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 let firebaseInitialized = false;
-let database = null;
+let db = null;
 
 try {
     if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
         firebase.initializeApp(firebaseConfig);
-        database = firebase.database();
+        db = firebase.firestore();
         firebaseInitialized = true;
-        console.log('Firebase initialized successfully');
+        console.log('Firebase (Firestore) initialized successfully');
     } else {
         console.warn('Firebase not configured. Please update firebase-config.js with your Firebase credentials.');
     }

@@ -1,6 +1,6 @@
 /**
- * Customer Reviews System
- * Handles service ratings and feedback with Firebase integration
+ * Customer Reviews System - Firestore Edition
+ * Handles service ratings and feedback with Firebase Firestore integration
  */
 
 // ============================================
@@ -133,26 +133,30 @@ function submitReview() {
         service: ReviewState.selectedService,
         rating: ReviewState.selectedRating,
         comment: comment,
-        timestamp: Date.now()
+        timestamp: firebase.firestore.Timestamp.now()
     };
 
-    if (firebaseInitialized && database) {
-        // Save to Firebase
-        saveToFirebase(reviewData);
+    if (firebaseInitialized && db) {
+        // Save to Firestore
+        saveToFirestore(reviewData);
     } else {
         // Save to localStorage as fallback
         saveToLocalStorage(reviewData);
     }
 }
 
-function saveToFirebase(reviewData) {
-    const reviewsRef = database.ref('reviews/' + ReviewState.selectedService);
-
-    // Push new review
-    reviewsRef.push(reviewData)
+function saveToFirestore(reviewData) {
+    // Save the review
+    db.collection('reviews')
+        .doc(ReviewState.selectedService)
+        .collection('entries')
+        .add(reviewData)
+        .then(() => {
+            // Update rating counts
+            return updateRatingCount(ReviewState.selectedService, ReviewState.selectedRating);
+        })
         .then(() => {
             showStatus('Thank you for your feedback! ✓', 'success');
-            updateRatingCount(ReviewState.selectedService, ReviewState.selectedRating);
             setTimeout(() => {
                 resetReviewForm();
                 loadRatingsData();
@@ -164,10 +168,26 @@ function saveToFirebase(reviewData) {
         });
 }
 
+function updateRatingCount(service, rating) {
+    const ratingsRef = db.collection('ratings').doc(service);
+
+    return db.runTransaction((transaction) => {
+        return transaction.get(ratingsRef).then((doc) => {
+            const currentData = doc.exists ? doc.data() : { useful: 0, 'not-useful': 0, banned: 0 };
+            const newCount = (currentData[rating] || 0) + 1;
+            currentData[rating] = newCount;
+            transaction.set(ratingsRef, currentData);
+        });
+    });
+}
+
 function saveToLocalStorage(reviewData) {
     // Fallback when Firebase is not configured
     let reviews = JSON.parse(localStorage.getItem('aiServiceReviews') || '[]');
-    reviews.push(reviewData);
+    reviews.push({
+        ...reviewData,
+        timestamp: Date.now()
+    });
     localStorage.setItem('aiServiceReviews', JSON.stringify(reviews));
 
     showStatus('Thank you for your feedback! ✓ (Saved locally)', 'success');
@@ -175,13 +195,6 @@ function saveToLocalStorage(reviewData) {
         resetReviewForm();
         loadRatingsData();
     }, 2000);
-}
-
-function updateRatingCount(service, rating) {
-    const ratingsRef = database.ref('ratings/' + service + '/' + rating);
-    ratingsRef.transaction((currentCount) => {
-        return (currentCount || 0) + 1;
-    });
 }
 
 function showStatus(message, type) {
@@ -197,20 +210,22 @@ function showStatus(message, type) {
 // ============================================
 
 function loadRatingsData() {
-    if (firebaseInitialized && database) {
-        loadFromFirebase();
+    if (firebaseInitialized && db) {
+        loadFromFirestore();
     } else {
         loadFromLocalStorage();
     }
 }
 
-function loadFromFirebase() {
-    const ratingsRef = database.ref('ratings');
-
-    ratingsRef.once('value')
-        .then((snapshot) => {
-            const data = snapshot.val();
-            ReviewState.allRatings = data || {};
+function loadFromFirestore() {
+    db.collection('ratings')
+        .get()
+        .then((querySnapshot) => {
+            const ratings = {};
+            querySnapshot.forEach((doc) => {
+                ratings[doc.id] = doc.data();
+            });
+            ReviewState.allRatings = ratings;
             displayRatings();
         })
         .catch((error) => {
