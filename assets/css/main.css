@@ -1230,3 +1230,261 @@ body {
         font-size: 1.5rem;
     }
 }
+
+/* ============================================
+   Pricing Section
+   ============================================ */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.pricing-card {
+    background: var(--bg-card);
+    border: 3px solid var(--lottery-silver);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-card);
+    position: relative;
+}
+
+.pricing-card.featured {
+    border-color: var(--lottery-gold);
+    border-width: 5px;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-mega);
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-mega);
+}
+
+.pricing-card.featured:hover {
+    transform: translateY(-10px) scale(1.08);
+}
+
+.pricing-badge {
+    background: var(--lottery-silver);
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.pricing-badge.premium {
+    background: var(--gradient-gold);
+    animation: pulse 2s infinite;
+}
+
+.pricing-tier {
+    font-size: 2rem;
+    color: var(--lottery-gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.pricing-price {
+    margin: 1.5rem 0;
+}
+
+.price-amount {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+.price-period {
+    font-size: 1.2rem;
+    color: var(--lottery-silver);
+}
+
+.pricing-annual {
+    font-size: 1rem;
+    color: var(--lottery-gold);
+    margin-bottom: 1.5rem;
+}
+
+.savings {
+    background: var(--lottery-red);
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-weight: 900;
+    margin-left: 0.5rem;
+}
+
+.pricing-features {
+    text-align: left;
+    margin: 2rem 0;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature:last-child {
+    border-bottom: none;
+}
+
+.feature.disabled {
+    opacity: 0.5;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    min-width: 20px;
+    color: var(--lottery-gold);
+}
+
+.feature.disabled .feature-icon {
+    color: var(--lottery-silver);
+}
+
+.feature-text {
+    font-size: 0.95rem;
+}
+
+.pricing-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: 3px solid var(--lottery-gold);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.pricing-button:hover {
+    background: var(--gradient-gold);
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-emboss);
+}
+
+.pricing-button.premium {
+    background: var(--gradient-gold);
+    color: #000;
+    border-color: var(--lottery-red);
+}
+
+.pricing-button.premium:hover {
+    background: var(--gradient-red);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Comparison Table */
+.pricing-comparison {
+    margin: 4rem 0;
+}
+
+.comparison-title {
+    font-size: 1.8rem;
+    color: var(--lottery-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-table th {
+    background: var(--bg-secondary);
+    color: var(--lottery-gold);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.comparison-table .premium-col {
+    background: rgba(255, 215, 0, 0.1);
+    font-weight: bold;
+    color: var(--lottery-gold);
+}
+
+.comparison-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* FAQ Section */
+.pricing-faq {
+    margin-top: 3rem;
+}
+
+.faq-title {
+    font-size: 1.8rem;
+    color: var(--lottery-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.faq-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--lottery-gold);
+}
+
+.faq-question {
+    font-size: 1.2rem;
+    color: var(--lottery-gold);
+    margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Responsive Pricing */
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .price-amount {
+        font-size: 2.5rem;
+    }
+
+    .comparison-table {
+        font-size: 0.85rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
