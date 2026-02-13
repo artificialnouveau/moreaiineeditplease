@@ -9,7 +9,7 @@
 // ============================================
 
 const AppState = {
-    currentTab: 'companions',
+    currentTab: 'automation',
     urgentTimerInterval: null,
     mysteryHistory: []
 };
