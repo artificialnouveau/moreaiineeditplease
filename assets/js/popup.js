@@ -154,13 +154,15 @@ function initPopups() {
 }
 
 /**
- * Start popup system
+ * Start popup system (shows once after delay)
  */
 function startPopups() {
     if (!PopupManager.enabled) return;
 
-    // Schedule first popup
-    scheduleNextPopup();
+    // Show popup once after 10 seconds
+    PopupManager.nextPopupTimeout = setTimeout(() => {
+        showPopup();
+    }, 10000); // 10 seconds
 }
 
 /**
@@ -240,17 +242,16 @@ function hidePopup() {
 }
 
 /**
- * Dismiss popup (with punishment mechanic)
+ * Dismiss popup (no longer schedules another popup)
  */
 function dismissPopup() {
     hidePopup();
 
-    // Punishment mechanic: dismissing speeds up next popup
+    // Mark as dismissed, don't show again
     PopupManager.dismissCount++;
-    acceleratePopups();
 
-    // Schedule next popup immediately
-    scheduleNextPopup();
+    // Don't schedule another popup
+    PopupManager.enabled = false;
 }
 
 // ============================================

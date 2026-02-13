@@ -154,12 +154,10 @@ function initApp() {
     // Set up CTA button
     setupCTAButton();
 
-    // Start popup system after delay
-    setTimeout(() => {
-        if (typeof startPopups === 'function') {
-            startPopups();
-        }
-    }, 15000); // First popup after 15 seconds
+    // Start popup system (shows once after 10 seconds)
+    if (typeof startPopups === 'function') {
+        startPopups();
+    }
 
     console.log('Will I Have A Job? - Initialized');
 }
