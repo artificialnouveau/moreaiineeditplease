@@ -56,6 +56,7 @@
                 <button class="tab-button" data-tab="automation">⚙️ AUTOMATION</button>
                 <button class="tab-button" data-tab="reality">🔮 REALITY ADJUSTERS</button>
                 <button class="tab-button" data-tab="pricing">💎 PRICING</button>
+                <button class="tab-button" data-tab="reviews">⭐ REVIEWS</button>
                 <button class="tab-button" data-tab="mystery">🎲 MYSTERY BOX</button>
             </div>
         </section>
@@ -461,6 +462,102 @@
             </div>
         </section>
 
+        <!-- REVIEWS TAB -->
+        <section id="reviews-tab" class="tab-content hidden">
+            <div class="card">
+                <h2 class="section-title">⭐ CUSTOMER REVIEWS</h2>
+                <p class="section-description">Help us improve! Rate our AI services and share your feedback.</p>
+
+                <!-- Service Selector -->
+                <div class="review-selector">
+                    <label for="service-select" class="review-label">Select a service to review:</label>
+                    <select id="service-select" class="service-select">
+                        <option value="">Choose a service...</option>
+                        <optgroup label="AI Companions">
+                            <option value="AI Actress">AI Actress</option>
+                            <option value="AI Politician">AI Politician</option>
+                            <option value="AI Customer Service">AI Customer Service</option>
+                            <option value="AI Cousin">AI Cousin</option>
+                            <option value="Personal Hype Person">Personal Hype Person</option>
+                            <option value="Confidence Boost Sessions">Confidence Boost Sessions</option>
+                            <option value="Practice Conversation Partner">Practice Conversation Partner</option>
+                            <option value="Emotional Support Bot">Emotional Support Bot</option>
+                            <option value="Victory Lap Narrator">Victory Lap Narrator</option>
+                            <option value="Perspective Checker">Perspective Checker</option>
+                            <option value="Sleep Arguments Winner">Sleep Arguments Winner</option>
+                            <option value="Imposter Syndrome Fighter">Imposter Syndrome Fighter</option>
+                        </optgroup>
+                        <optgroup label="Automation Services">
+                            <option value="Throat Clearing Service">Throat Clearing Service</option>
+                            <option value="Auto-Sorry Bot">Auto-Sorry Bot</option>
+                            <option value="Demand Apology AI">Demand Apology AI</option>
+                            <option value="Friend Date Arranger">Friend Date Arranger</option>
+                            <option value="Small Talk Generator">Small Talk Generator</option>
+                            <option value="Social Battery Monitor">Social Battery Monitor</option>
+                            <option value="Text Back Timer">Text Back Timer</option>
+                            <option value="Excuse Generator Pro">Excuse Generator Pro</option>
+                        </optgroup>
+                        <optgroup label="Reality Adjusters">
+                            <option value="Life Filter">Life Filter</option>
+                            <option value="Memory Editor">Memory Editor</option>
+                            <option value="Time Perception Adjuster">Time Perception Adjuster</option>
+                            <option value="Compliment Amplifier">Compliment Amplifier</option>
+                            <option value="Difficulty Level Changer">Difficulty Level Changer</option>
+                            <option value="Reality Check Suppressor">Reality Check Suppressor</option>
+                            <option value="Self-Esteem Projector">Self-Esteem Projector</option>
+                            <option value="Embarrassment Eraser">Embarrassment Eraser</option>
+                            <option value="Success Rate Inflator">Success Rate Inflator</option>
+                            <option value="Main Character Syndrome AI">Main Character Syndrome AI</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Review Form -->
+                <div id="review-form-container" class="review-form-container hidden">
+                    <h3 id="reviewing-service-name" class="reviewing-service"></h3>
+
+                    <!-- Rating Options -->
+                    <div class="rating-options">
+                        <h4 class="rating-question">How would you rate this service?</h4>
+                        <div class="rating-buttons">
+                            <button class="rating-btn useful" data-rating="useful">
+                                <span class="rating-emoji">👍</span>
+                                <span class="rating-text">Useful</span>
+                            </button>
+                            <button class="rating-btn not-useful" data-rating="not-useful">
+                                <span class="rating-emoji">👎</span>
+                                <span class="rating-text">Not Useful</span>
+                            </button>
+                            <button class="rating-btn banned" data-rating="banned">
+                                <span class="rating-emoji">🚫</span>
+                                <span class="rating-text">Should Be Banned</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comment Section -->
+                    <div class="review-comment-section">
+                        <label for="review-comment" class="review-label">Tell us more (optional):</label>
+                        <textarea id="review-comment" class="review-textarea" placeholder="Share your experience with this service..." rows="4"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button id="submit-review-btn" class="cta-button" disabled>Submit Review</button>
+                    <p id="review-status" class="review-status"></p>
+                </div>
+
+                <!-- Results Dashboard -->
+                <div class="results-dashboard">
+                    <h3 class="dashboard-title">📊 Service Ratings Overview</h3>
+                    <p class="dashboard-description">See what others think about our AI services</p>
+
+                    <div id="ratings-grid" class="ratings-grid">
+                        <p class="loading-text">Loading ratings data...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- MYSTERY BOX TAB -->
         <section id="mystery-tab" class="tab-content hidden">
             <div class="card mystery-card">
@@ -549,10 +646,16 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
     <!-- JavaScript -->
+    <script src="assets/js/firebase-config.js"></script>
     <script src="assets/js/animations.js"></script>
     <script src="assets/js/audio.js"></script>
     <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/reviews.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
