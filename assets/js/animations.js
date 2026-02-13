@@ -48,8 +48,8 @@ function initAnimations() {
     // Initialize confetti system
     initConfetti();
 
-    // Start continuous sparkle generation
-    setInterval(createSparkle, 500);
+    // Sparkles disabled
+    // setInterval(createSparkle, 500);
 }
 
 // ============================================
