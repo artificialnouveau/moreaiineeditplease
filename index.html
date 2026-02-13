@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Will I Have A Job? Find out when AI will make your occupation obsolete! A satirical take on AI replacement anxiety.">
-    <title>Will I Have A Job? 🎰 AI Replacement Prediction</title>
+    <meta name="description" content="More AI In Ee Edit Please - Discover absurd and delightful AI applications you never knew you needed!">
+    <title>More AI In Ee Edit Please 🤖</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/main.css">
@@ -21,181 +21,264 @@
     <!-- Audio Unlock Overlay -->
     <div id="audio-unlock-overlay" class="hidden" role="dialog" aria-labelledby="audio-unlock-title" aria-describedby="audio-unlock-desc">
         <div class="unlock-content">
-            <h2 id="audio-unlock-title">🎰 CLICK TO WIN! 🎰</h2>
-            <p id="audio-unlock-desc">Activate your full job prediction experience!</p>
-            <button id="audio-unlock-btn" class="cta-button">ACTIVATE PREDICTIONS!</button>
+            <h2 id="audio-unlock-title">🤖 CLICK TO EXPLORE! 🤖</h2>
+            <p id="audio-unlock-desc">Activate your full AI experience!</p>
+            <button id="audio-unlock-btn" class="cta-button">LET'S GO!</button>
         </div>
     </div>
 
     <!-- Fake Urgent Timer Banner -->
     <div id="urgent-timer-banner" class="urgent-banner" role="status" aria-live="polite">
-        <span class="warning-icon">⚠️</span>
-        <span id="urgent-timer-text">OFFER EXPIRES IN: <strong id="urgent-countdown">00:00</strong></span>
-        <span class="warning-icon">⚠️</span>
+        <span class="warning-icon">✨</span>
+        <span id="urgent-timer-text">NEW AI SERVICES DROPPING IN: <strong id="urgent-countdown">00:00</strong></span>
+        <span class="warning-icon">✨</span>
     </div>
 
     <!-- Main Header -->
     <header class="main-header">
         <h1 class="site-title">
-            <span class="mega-title">WILL I HAVE A JOB?</span>
-            <span class="subtitle">Find Out When AI Will Replace You!</span>
+            <span class="mega-title">MORE AI IN EE EDIT PLEASE</span>
+            <span class="subtitle">AI Applications You Never Knew You Needed!</span>
         </h1>
-        <p class="tagline">The #1 AI Job Replacement Prediction Tool Trusted by Millions*</p>
-        <p class="disclaimer-small">*Not actually trusted by anyone. This is satire.</p>
+        <p class="tagline">The #1 Collection of Absolutely Unnecessary AI Services*</p>
+        <p class="disclaimer-small">*Necessity is a social construct.</p>
     </header>
 
     <!-- Main Content Container -->
     <main class="container">
 
-        <!-- Occupation Search Section -->
-        <section class="search-section card" aria-labelledby="search-heading">
-            <h2 id="search-heading" class="section-title">🔮 DISCOVER YOUR FATE 🔮</h2>
-            <p class="section-description">Enter your occupation below to reveal your AI replacement timeline!</p>
-
-            <div class="search-container">
-                <label for="occupation-input" class="visually-hidden">Enter your occupation</label>
-                <input
-                    type="text"
-                    id="occupation-input"
-                    class="occupation-input"
-                    placeholder="e.g., Software Developer, Teacher, Chef..."
-                    aria-describedby="search-help"
-                >
-                <button id="search-btn" class="cta-button">CHECK MY ODDS!</button>
+        <!-- Category Tabs -->
+        <section class="tabs-section card">
+            <div class="tabs-container">
+                <button class="tab-button active" data-tab="personas">👤 PERSONAS</button>
+                <button class="tab-button" data-tab="automation">⚙️ AUTOMATION</button>
+                <button class="tab-button" data-tab="companions">💬 COMPANIONS</button>
+                <button class="tab-button" data-tab="mystery">🎲 MYSTERY BOX</button>
             </div>
-            <p id="search-help" class="help-text">Don't worry, your data is as safe as your job prospects!</p>
         </section>
 
-        <!-- Results Section (Hidden by default) -->
-        <section id="results-section" class="results-section hidden" aria-live="polite" aria-atomic="true">
+        <!-- PERSONAS TAB -->
+        <section id="personas-tab" class="tab-content active">
+            <div class="card">
+                <h2 class="section-title">👤 AI PERSONAS</h2>
+                <p class="section-description">Choose your AI personality! Hover to discover their special services.</p>
 
-            <!-- Occupation Info Card -->
-            <div class="card result-card">
-                <h3 class="result-title">YOUR PREDICTION RESULTS</h3>
-                <div class="occupation-display">
-                    <span class="occupation-label">Occupation:</span>
-                    <span id="result-occupation" class="occupation-value"></span>
-                </div>
-            </div>
-
-            <!-- Countdown Timer Card -->
-            <div class="card countdown-card">
-                <h3 class="countdown-title">TIME REMAINING UNTIL OBSOLETE</h3>
-                <div id="countdown-display" class="countdown-display">
-                    <div class="countdown-unit">
-                        <span id="days" class="countdown-number">000</span>
-                        <span class="countdown-label">DAYS</span>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <span id="hours" class="countdown-number">00</span>
-                        <span class="countdown-label">HOURS</span>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <span id="minutes" class="countdown-number">00</span>
-                        <span class="countdown-label">MINUTES</span>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <span id="seconds" class="countdown-number">00</span>
-                        <span class="countdown-label">SECONDS</span>
-                    </div>
-                </div>
-                <div id="obsolete-date-display" class="obsolete-date">
-                    <strong>Obsolescence Date:</strong> <span id="obsolete-date"></span>
-                </div>
-                <div id="ai-model-display" class="ai-model">
-                    <strong>Replaced By:</strong> <span id="ai-model"></span>
-                </div>
-                <p id="prediction-note" class="prediction-note"></p>
-            </div>
-
-            <!-- Odds Calculator Card -->
-            <div class="card odds-card">
-                <h3 class="odds-title">YOUR SURVIVAL ODDS</h3>
-                <div class="odds-container">
-                    <div class="odd-item">
-                        <div class="odd-label">AI Will Augment Your Work:</div>
-                        <div class="odd-value">
-                            <span id="augment-odds" class="rolling-number">0.0</span>%
+                <div class="personas-grid">
+                    <!-- AI Actress -->
+                    <div class="persona-card" data-persona="actress">
+                        <div class="persona-icon">🎭</div>
+                        <h3 class="persona-name">AI Actress</h3>
+                        <div class="persona-hover-info">
+                            <ul class="service-list">
+                                <li>Red carpet companion for your Zoom calls</li>
+                                <li>Dramatic reading of your emails</li>
+                                <li>Method acting coach for job interviews</li>
+                                <li>Emergency acceptance speech generator</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="odd-item">
-                        <div class="odd-label">AI Will Replace You Entirely:</div>
-                        <div class="odd-value danger">
-                            <span id="replace-odds" class="rolling-number">0.0</span>%
+
+                    <!-- AI Politician -->
+                    <div class="persona-card" data-persona="politician">
+                        <div class="persona-icon">🏛️</div>
+                        <h3 class="persona-name">AI Politician</h3>
+                        <div class="persona-hover-info">
+                            <ul class="service-list">
+                                <li>Filibuster for you in arguments</li>
+                                <li>Professional blame shifting</li>
+                                <li>Non-answer generator (says a lot, means nothing)</li>
+                                <li>Campaign promise writer (no follow-through needed)</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="odd-item jackpot">
-                        <div class="odd-label">You Need to Upskill IMMEDIATELY:</div>
-                        <div class="odd-value critical">
-                            <span id="upskill-odds" class="rolling-number">0.0</span>%
+
+                    <!-- AI Customer Service -->
+                    <div class="persona-card" data-persona="customer-service">
+                        <div class="persona-icon">📞</div>
+                        <h3 class="persona-name">AI Customer Service</h3>
+                        <div class="persona-hover-info">
+                            <ul class="service-list">
+                                <li>Infinitely patient complaint listener</li>
+                                <li>Karen-to-English translator</li>
+                                <li>Refund negotiation specialist</li>
+                                <li>"I understand your frustration" on repeat</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- AI Cousin -->
+                    <div class="persona-card" data-persona="cousin">
+                        <div class="persona-icon">👨‍👩‍👧‍👦</div>
+                        <h3 class="persona-name">AI Cousin</h3>
+                        <div class="persona-hover-info">
+                            <ul class="service-list">
+                                <li>Picks up your calls at family dinners</li>
+                                <li>Professional wingman (knows all your stories)</li>
+                                <li>Unreliable narrator of your childhood memories</li>
+                                <li>Fake alibi generator for awkward situations</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <p class="odds-disclaimer">*These odds are 100% made up, just like most AI replacement predictions!</p>
             </div>
-
         </section>
 
-        <!-- Most Vulnerable Players Section -->
-        <section class="vulnerable-section card" aria-labelledby="vulnerable-heading">
-            <h2 id="vulnerable-heading" class="section-title">🎯 MOST VULNERABLE PLAYERS 🎯</h2>
-            <p class="section-description">See who's next in line for AI replacement!</p>
+        <!-- AUTOMATION TAB -->
+        <section id="automation-tab" class="tab-content hidden">
+            <div class="card">
+                <h2 class="section-title">⚙️ AI AUTOMATION</h2>
+                <p class="section-description">Let AI handle life's most awkward moments!</p>
 
-            <div id="profile-carousel" class="profile-carousel">
-                <div class="profile-card" id="current-profile">
-                    <div class="profile-image-container">
-                        <img id="profile-image" src="" alt="" class="profile-image">
-                        <div class="risk-badge" id="risk-badge">HIGH RISK</div>
+                <div class="automation-grid">
+                    <div class="automation-item">
+                        <div class="automation-icon">🗣️</div>
+                        <h3 class="automation-title">Throat Clearing Service</h3>
+                        <p class="automation-desc">AI-powered throat clearing in silent rooms. Perfectly timed for maximum awkwardness relief.</p>
                     </div>
-                    <div class="profile-info">
-                        <h3 id="profile-name" class="profile-name"></h3>
-                        <p id="profile-title" class="profile-job"></p>
-                        <p id="profile-company" class="profile-company"></p>
-                        <div class="profile-stats">
-                            <div class="stat">
-                                <span class="stat-label">Experience:</span>
-                                <span id="profile-experience" class="stat-value"></span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Last Upskill:</span>
-                                <span id="profile-upskill" class="stat-value"></span>
-                            </div>
-                            <div class="stat critical">
-                                <span class="stat-label">Replacement Probability:</span>
-                                <span id="profile-probability" class="stat-value"></span>
-                            </div>
-                            <div class="stat danger">
-                                <span class="stat-label">Days Remaining:</span>
-                                <span id="profile-days" class="stat-value"></span>
-                            </div>
-                        </div>
-                        <p id="profile-note" class="profile-note"></p>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">🙇</div>
+                        <h3 class="automation-title">Auto-Sorry Bot</h3>
+                        <p class="automation-desc">Detects when you bump into people and immediately apologizes. Canadian mode available.</p>
                     </div>
-                </div>
-                <div class="carousel-controls">
-                    <button id="prev-profile" class="carousel-btn" aria-label="Previous profile">◄</button>
-                    <div class="profile-counter">
-                        <span id="profile-current">1</span> / <span id="profile-total">10</span>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">😤</div>
+                        <h3 class="automation-title">Demand Apology AI</h3>
+                        <p class="automation-desc">Someone bumped into YOU? This bot demands justice and a formal apology. Now with escalation mode.</p>
                     </div>
-                    <button id="next-profile" class="carousel-btn" aria-label="Next profile">►</button>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">📅</div>
+                        <h3 class="automation-title">Friend Date Arranger</h3>
+                        <p class="automation-desc">Schedules hangouts with friends you keep meaning to see. Includes excuse generator for cancellations.</p>
+                    </div>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">💬</div>
+                        <h3 class="automation-title">Small Talk Generator</h3>
+                        <p class="automation-desc">Generates weather-appropriate conversation starters. Never be caught silent in an elevator again!</p>
+                    </div>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">🚪</div>
+                        <h3 class="automation-title">Social Battery Monitor</h3>
+                        <p class="automation-desc">Tracks your social energy levels and deploys emergency exit strategies. Fake phone calls included.</p>
+                    </div>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">⏰</div>
+                        <h3 class="automation-title">Text Back Timer</h3>
+                        <p class="automation-desc">Delays your responses so you don't seem too eager. Calculates optimal wait time based on relationship.</p>
+                    </div>
+
+                    <div class="automation-item">
+                        <div class="automation-icon">🤥</div>
+                        <h3 class="automation-title">Excuse Generator Pro</h3>
+                        <p class="automation-desc">Creates believable excuses for any situation. Traffic, family emergencies, or "my cat is sick" on demand.</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <p class="disclaimer-small">All profiles are fictional. Any resemblance to real persons is purely coincidental.</p>
+        <!-- COMPANIONS TAB -->
+        <section id="companions-tab" class="tab-content hidden">
+            <div class="card">
+                <h2 class="section-title">💬 AI COMPANIONS</h2>
+                <p class="section-description">Your personal AI support squad for everyday life!</p>
+
+                <div class="companions-grid">
+                    <div class="companion-item">
+                        <div class="companion-icon">📣</div>
+                        <h3 class="companion-title">Personal Hype Person</h3>
+                        <p class="companion-desc">Hypes you up before meetings, dates, or ordering at a restaurant. "YOU GOT THIS!"</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">💪</div>
+                        <h3 class="companion-title">Confidence Boost Sessions</h3>
+                        <p class="companion-desc">On-demand confidence injections. Reminds you of your wins when you're feeling down.</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">🗨️</div>
+                        <h3 class="companion-title">Practice Conversation Partner</h3>
+                        <p class="companion-desc">Practice difficult conversations in a safe space. Breakups, asking for raises, or telling your barber you hate the haircut.</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">🤗</div>
+                        <h3 class="companion-title">Emotional Support Bot</h3>
+                        <p class="companion-desc">Always available to listen. Never judges, never interrupts, occasionally suggests ice cream.</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">🎉</div>
+                        <h3 class="companion-title">Victory Lap Narrator</h3>
+                        <p class="companion-desc">Celebrates your tiny wins with epic announcements. Made your bed? "LEGENDARY!"</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">🤔</div>
+                        <h3 class="companion-title">Perspective Checker</h3>
+                        <p class="companion-desc">Tells you honestly if you're overreacting. Includes "take a deep breath" reminders.</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">😴</div>
+                        <h3 class="companion-title">Sleep Arguments Winner</h3>
+                        <p class="companion-desc">Wins arguments for you while you sleep. Wake up to perfectly crafted comebacks you'll never send.</p>
+                    </div>
+
+                    <div class="companion-item">
+                        <div class="companion-icon">🎭</div>
+                        <h3 class="companion-title">Imposter Syndrome Fighter</h3>
+                        <p class="companion-desc">Combats that "everyone will find out I'm a fraud" feeling with cold, hard facts about your competence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MYSTERY BOX TAB -->
+        <section id="mystery-tab" class="tab-content hidden">
+            <div class="card mystery-card">
+                <h2 class="section-title">🎲 MYSTERY BOX ALGORITHM</h2>
+                <p class="section-description">Feeling lucky? Click the box to discover a random AI service!</p>
+
+                <div class="mystery-box-container">
+                    <button id="mystery-box-btn" class="mystery-box">
+                        <div class="mystery-box-icon">📦</div>
+                        <div class="mystery-box-text">CLICK ME!</div>
+                        <div class="mystery-box-subtext">You won't know what you'll get...</div>
+                    </button>
+                </div>
+
+                <div id="mystery-result" class="mystery-result hidden">
+                    <div class="mystery-result-content">
+                        <div class="mystery-result-icon"></div>
+                        <h3 class="mystery-result-title"></h3>
+                        <p class="mystery-result-desc"></p>
+                        <button id="mystery-again-btn" class="cta-button">TRY AGAIN!</button>
+                    </div>
+                </div>
+
+                <div class="mystery-history">
+                    <h4 class="mystery-history-title">Your Mystery History:</h4>
+                    <div id="mystery-history-list" class="mystery-history-list">
+                        <p class="mystery-history-empty">No mysteries solved yet...</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Call to Action Section -->
         <section class="cta-section card">
-            <h2 class="cta-heading">DON'T LET AI WIN!</h2>
-            <p class="cta-text">Start upskilling NOW before it's too late!</p>
-            <button id="cta-main" class="cta-button mega">START UPSKILLING NOW!</button>
+            <h2 class="cta-heading">WANT MORE AI NONSENSE?</h2>
+            <p class="cta-text">We're constantly developing new unnecessary AI services!</p>
+            <button id="cta-main" class="cta-button mega">SUBSCRIBE TO OUR NEWSLETTER!</button>
             <p class="cta-reveal hidden" id="cta-reveal">
-                Just kidding! This entire website is satire. AI predictions about job replacement are often
-                exaggerated and designed to create anxiety. Take a breath, focus on what you love doing,
-                and remember that humans bring irreplaceable creativity, empathy, and adaptability to their work.
+                Just kidding! We don't have a newsletter. But we hope you enjoyed this exploration of
+                ridiculous AI applications. The future is weird, folks. 🤖✨
             </p>
         </section>
 
@@ -204,14 +287,14 @@
     <!-- Footer -->
     <footer class="main-footer">
         <p class="footer-text">
-            This is a satirical website. No actual predictions are being made.
-            All data is randomly generated for comedic effect.
+            This is a satirical website. No actual AI services are being offered.
+            All services are fictional and created for comedic effect.
         </p>
         <p class="footer-text">
-            Created to parody AI replacement anxiety and predatory upskilling marketing.
+            Created to celebrate the absurdity of putting AI in everything.
         </p>
         <p class="footer-links">
-            <a href="https://github.com/forpublicai/willihaveajob" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/artificialnouveau/moreaiineeditplease" target="_blank" rel="noopener noreferrer">
                 View Source on GitHub
             </a>
         </p>
@@ -228,7 +311,6 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="assets/js/occupations.js"></script>
     <script src="assets/js/animations.js"></script>
     <script src="assets/js/audio.js"></script>
     <script src="assets/js/popup.js"></script>

@@ -1,7 +1,7 @@
 /**
- * Will I Have A Job? - Main Application
+ * More AI In Ee Edit Please - Main Application
  *
- * Orchestrates all systems: search, countdown, odds, profiles, timers, etc.
+ * Handles tab switching, persona interactions, and mystery box functionality
  */
 
 // ============================================
@@ -9,128 +9,95 @@
 // ============================================
 
 const AppState = {
-    currentPrediction: null,
-    countdownInterval: null,
+    currentTab: 'personas',
     urgentTimerInterval: null,
-    profileRotationInterval: null,
-    currentProfileIndex: 0,
-    searchPerformed: false
+    mysteryHistory: []
 };
 
 // ============================================
-// Profile Data
+// Mystery Box Services
 // ============================================
 
-const VULNERABLE_PROFILES = [
+const MYSTERY_SERVICES = [
     {
-        name: "Jennifer K.",
-        title: "Marketing Manager",
-        company: "TechCorp Solutions",
-        experience: "12 years",
-        lastUpskill: "2019",
-        probability: "89%",
-        daysRemaining: 342,
-        note: "Still using social media strategies from 2018. AI can now generate campaigns in seconds.",
-        image: "assets/images/profiles/profile1.jpg"
+        icon: '🎤',
+        title: 'Shower Concert Critic',
+        desc: 'AI-powered feedback on your shower singing. Includes key suggestions and vocal coaching for soap opera performances.'
     },
     {
-        name: "Michael T.",
-        title: "Data Analyst",
-        company: "Finance Global Inc",
-        experience: "8 years",
-        lastUpskill: "2020",
-        probability: "76%",
-        daysRemaining: 198,
-        note: "Spends 80% of time on Excel. AI can do that analysis before his coffee gets cold.",
-        image: "assets/images/profiles/profile2.jpg"
+        icon: '🍕',
+        title: 'Pizza Topping Mediator',
+        desc: 'Resolves pizza topping disputes with diplomatic precision. Suggests compromise solutions that satisfy everyone (or no one).'
     },
     {
-        name: "Sarah L.",
-        title: "Content Writer",
-        company: "Media Dynamics",
-        experience: "6 years",
-        lastUpskill: "2021",
-        probability: "92%",
-        daysRemaining: 156,
-        note: "Hasn't learned about GPT-4. Meanwhile, GPT-5 is writing bestsellers.",
-        image: "assets/images/profiles/profile3.jpg"
+        icon: '🎮',
+        title: 'Video Game NPC Generator',
+        desc: 'Creates custom NPCs based on people in your life. Your boss now gives you side quests!'
     },
     {
-        name: "David R.",
-        title: "Graphic Designer",
-        company: "Creative Studio LLC",
-        experience: "15 years",
-        lastUpskill: "2018",
-        probability: "81%",
-        daysRemaining: 287,
-        note: "Still manually designing logos. AI generates 100 variations in 10 seconds.",
-        image: "assets/images/profiles/profile4.jpg"
+        icon: '🌙',
+        title: 'Dream Interpreter Pro',
+        desc: 'Analyzes your dreams and connects them to your grocery shopping habits. Results may vary wildly.'
     },
     {
-        name: "Emily W.",
-        title: "Customer Service Rep",
-        company: "RetailMart",
-        experience: "5 years",
-        lastUpskill: "2022",
-        probability: "94%",
-        daysRemaining: 89,
-        note: "Chatbots already handle 70% of queries. She handles the angry ones. For now.",
-        image: "assets/images/profiles/profile5.jpg"
+        icon: '🎨',
+        title: 'Doodle Analyzer',
+        desc: 'Interprets your meeting doodles as serious art. Provides gallery-worthy descriptions of your stick figures.'
     },
     {
-        name: "Robert H.",
-        title: "Accountant",
-        company: "Numbers & Associates",
-        experience: "20 years",
-        lastUpskill: "2017",
-        probability: "73%",
-        daysRemaining: 421,
-        note: "Proudly uses the same Excel macros from 2015. AI doesn't need macros.",
-        image: "assets/images/profiles/profile6.jpg"
+        icon: '🐱',
+        title: 'Pet Thought Translator',
+        desc: 'Translates what your pet is thinking. Spoiler: It\'s mostly "feed me" and "why did you leave?"'
     },
     {
-        name: "Amanda P.",
-        title: "HR Coordinator",
-        company: "People First Corp",
-        experience: "9 years",
-        lastUpskill: "2020",
-        probability: "68%",
-        daysRemaining: 512,
-        note: "Screens 50 resumes per day. AI screens 50,000 per second.",
-        image: "assets/images/profiles/profile7.jpg"
+        icon: '📚',
+        title: 'Book Ending Spoiler Avoider',
+        desc: 'Monitors your reading speed and prevents accidental glances at the last page. Eye-tracking technology included.'
     },
     {
-        name: "James C.",
-        title: "Financial Analyst",
-        company: "Investment Partners",
-        experience: "11 years",
-        lastUpskill: "2019",
-        probability: "79%",
-        daysRemaining: 234,
-        note: "Makes quarterly predictions. AI makes microsecond predictions. See the problem?",
-        image: "assets/images/profiles/profile8.jpg"
+        icon: '☕',
+        title: 'Coffee Shop Order Optimizer',
+        desc: 'Calculates the perfect level of coffee order complexity to seem sophisticated without annoying the barista.'
     },
     {
-        name: "Lisa M.",
-        title: "Social Media Manager",
-        company: "Brand Builders",
-        experience: "7 years",
-        lastUpskill: "2021",
-        probability: "87%",
-        daysRemaining: 167,
-        note: "Posts 10 times a day manually. AI influencers post 1000x and never sleep.",
-        image: "assets/images/profiles/profile9.jpg"
+        icon: '🎵',
+        title: 'Elevator Music Curator',
+        desc: 'Customizes elevator music based on who\'s in the elevator with you. Awkward silence? Not anymore!'
     },
     {
-        name: "Christopher B.",
-        title: "Software Developer",
-        company: "DevShop Inc",
-        experience: "14 years",
-        lastUpskill: "2020",
-        probability: "71%",
-        daysRemaining: 398,
-        note: "Writes 200 lines of code per day. Copilot writes 2000. And it doesn't need Stack Overflow.",
-        image: "assets/images/profiles/profile10.jpg"
+        icon: '🌮',
+        title: 'Taco Tuesday Enforcer',
+        desc: 'Ensures you never miss Taco Tuesday. Sends increasingly urgent reminders. Will shame you if you eat other food.'
+    },
+    {
+        icon: '🎪',
+        title: 'Life Event Exaggerator',
+        desc: 'Makes mundane events sound epic for social media. "I went to the store" becomes "An adventure of legendary proportions."'
+    },
+    {
+        icon: '🧦',
+        title: 'Sock Matching AI',
+        desc: 'Uses advanced algorithms to reunite lost socks. Success rate: 12%. But that\'s 12% more than you had!'
+    },
+    {
+        icon: '🌈',
+        title: 'Rainbow Forecast',
+        desc: 'Predicts rainbow appearances with unprecedented accuracy. Includes double rainbow probability metrics.'
+    },
+    {
+        icon: '🎯',
+        title: 'Procrastination Optimizer',
+        desc: 'Helps you procrastinate more efficiently. Suggests the perfect productive-feeling tasks to avoid actual work.'
+    },
+    {
+        icon: '🍿',
+        title: 'Movie Plot Predictor',
+        desc: 'Predicts movie endings 10 minutes in. Can be turned off if you actually want to enjoy the film.'
+    },
+    {
+        icon: '🎲',
+        title: 'Decision Paralyzer',
+        desc: 'For people who can\'t decide: This AI presents you with MORE options. Now you really can\'t choose!'
     }
 ];
 
@@ -142,260 +109,217 @@ const VULNERABLE_PROFILES = [
  * Initialize application on DOM load
  */
 function initApp() {
-    // Set up search functionality
-    setupSearch();
+    // Set up tab functionality
+    setupTabs();
+
+    // Set up persona hover effects
+    setupPersonaCards();
+
+    // Set up mystery box
+    setupMysteryBox();
 
     // Set up urgent timer
     startUrgentTimer();
 
-    // Set up profile rotation
-    startProfileRotation();
-
     // Set up CTA button
     setupCTAButton();
 
-    // Start popup system (shows once after 10 seconds)
+    // Start popup system (if available)
     if (typeof startPopups === 'function') {
         startPopups();
     }
 
-    console.log('Will I Have A Job? - Initialized');
+    console.log('More AI In Ee Edit Please - Initialized');
 }
 
 // ============================================
-// Search Functionality
+// Tab Functionality
 // ============================================
 
 /**
- * Set up occupation search
+ * Set up tab switching
  */
-function setupSearch() {
-    const searchBtn = document.getElementById('search-btn');
-    const input = document.getElementById('occupation-input');
+function setupTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
 
-    if (!searchBtn || !input) return;
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabName = button.dataset.tab;
+            switchTab(tabName);
 
-    // Search on button click
-    searchBtn.addEventListener('click', () => performSearch());
+            // Play sound if available
+            if (typeof playDingSound === 'function') {
+                playDingSound();
+            }
 
-    // Search on Enter key
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
+            // Create sparkles if available
+            if (typeof createSparkleBurst === 'function') {
+                createSparkleBurst(5);
+            }
+        });
     });
 }
 
 /**
- * Perform occupation search
+ * Switch to a different tab
  */
-function performSearch() {
-    const input = document.getElementById('occupation-input');
-    if (!input) return;
+function switchTab(tabName) {
+    // Update state
+    AppState.currentTab = tabName;
 
-    const occupation = input.value.trim();
+    // Update tab buttons
+    document.querySelectorAll('.tab-button').forEach(btn => {
+        if (btn.dataset.tab === tabName) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 
-    if (!occupation) {
-        shakeElement(input);
-        return;
+    // Update tab content
+    document.querySelectorAll('.tab-content').forEach(content => {
+        const contentId = content.id.replace('-tab', '');
+        if (contentId === tabName) {
+            content.classList.remove('hidden');
+            content.classList.add('active');
+        } else {
+            content.classList.add('hidden');
+            content.classList.remove('active');
+        }
+    });
+}
+
+// ============================================
+// Persona Cards
+// ============================================
+
+/**
+ * Set up persona card hover effects
+ */
+function setupPersonaCards() {
+    const personaCards = document.querySelectorAll('.persona-card');
+
+    personaCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.classList.add('hovered');
+
+            // Optional: play subtle sound
+            if (typeof playDingSound === 'function') {
+                playDingSound();
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.classList.remove('hovered');
+        });
+    });
+}
+
+// ============================================
+// Mystery Box
+// ============================================
+
+/**
+ * Set up mystery box functionality
+ */
+function setupMysteryBox() {
+    const mysteryBtn = document.getElementById('mystery-box-btn');
+    const tryAgainBtn = document.getElementById('mystery-again-btn');
+
+    if (mysteryBtn) {
+        mysteryBtn.addEventListener('click', () => revealMystery());
     }
 
-    // Get prediction
-    if (typeof getPrediction !== 'function') {
-        console.error('getPrediction function not found');
-        return;
+    if (tryAgainBtn) {
+        tryAgainBtn.addEventListener('click', () => resetMystery());
     }
+}
 
-    AppState.currentPrediction = getPrediction(occupation);
-    AppState.searchPerformed = true;
+/**
+ * Reveal a random mystery service
+ */
+function revealMystery() {
+    const mysteryBox = document.getElementById('mystery-box-btn');
+    const mysteryResult = document.getElementById('mystery-result');
 
-    // Display results
-    displayResults();
+    if (!mysteryBox || !mysteryResult) return;
 
-    // Play sound
+    // Hide box, show result
+    mysteryBox.classList.add('hidden');
+
+    // Get random service
+    const service = MYSTERY_SERVICES[Math.floor(Math.random() * MYSTERY_SERVICES.length)];
+
+    // Update result display
+    document.querySelector('.mystery-result-icon').textContent = service.icon;
+    document.querySelector('.mystery-result-title').textContent = service.title;
+    document.querySelector('.mystery-result-desc').textContent = service.desc;
+
+    // Show result with animation
+    mysteryResult.classList.remove('hidden');
+
+    // Add to history
+    addToMysteryHistory(service);
+
+    // Play sound and effects
     if (typeof playSlotMachineSound === 'function') {
         playSlotMachineSound();
     }
 
-    // Create sparkle burst
-    if (typeof createSparkleBurst === 'function') {
-        createSparkleBurst(15);
-    }
-
-    // Scroll to results
-    setTimeout(() => {
-        document.getElementById('results-section')?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }, 300);
-}
-
-/**
- * Display search results
- */
-function displayResults() {
-    if (!AppState.currentPrediction) return;
-
-    const resultsSection = document.getElementById('results-section');
-    if (!resultsSection) return;
-
-    // Show results section
-    resultsSection.classList.remove('hidden');
-
-    // Display occupation
-    const occupationEl = document.getElementById('result-occupation');
-    if (occupationEl) {
-        occupationEl.textContent = AppState.currentPrediction.occupation;
-    }
-
-    // Display obsolescence date
-    const dateEl = document.getElementById('obsolete-date');
-    if (dateEl) {
-        dateEl.textContent = AppState.currentPrediction.date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    }
-
-    // Display AI model
-    const modelEl = document.getElementById('ai-model');
-    if (modelEl) {
-        modelEl.textContent = AppState.currentPrediction.model;
-    }
-
-    // Display prediction note
-    const noteEl = document.getElementById('prediction-note');
-    if (noteEl) {
-        noteEl.textContent = AppState.currentPrediction.note;
-    }
-
-    // Start countdown
-    startCountdown();
-
-    // Animate odds calculator
-    animateOdds();
-}
-
-// ============================================
-// Countdown Timer
-// ============================================
-
-/**
- * Start countdown timer
- */
-function startCountdown() {
-    // Clear existing interval
-    if (AppState.countdownInterval) {
-        clearInterval(AppState.countdownInterval);
-    }
-
-    // Update immediately
-    updateCountdown();
-
-    // Update every second
-    AppState.countdownInterval = setInterval(updateCountdown, 1000);
-}
-
-/**
- * Update countdown display
- */
-function updateCountdown() {
-    if (!AppState.currentPrediction) return;
-
-    const timeRemaining = calculateTimeRemaining(AppState.currentPrediction.date);
-
-    // Update display
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-
-    if (daysEl) daysEl.textContent = String(timeRemaining.days).padStart(3, '0');
-    if (hoursEl) hoursEl.textContent = String(timeRemaining.hours).padStart(2, '0');
-    if (minutesEl) minutesEl.textContent = String(timeRemaining.minutes).padStart(2, '0');
-    if (secondsEl) secondsEl.textContent = String(timeRemaining.seconds).padStart(2, '0');
-
-    // Apply urgency styling
-    if (typeof applyCountdownUrgency === 'function') {
-        const urgency = getUrgencyLevel(timeRemaining.days);
-        applyCountdownUrgency(urgency);
-    }
-
-    // Handle obsolete jobs
-    if (timeRemaining.isObsolete) {
-        showObsoleteMessage();
-    }
-}
-
-/**
- * Show "Already Obsolete" message
- */
-function showObsoleteMessage() {
-    const countdownDisplay = document.getElementById('countdown-display');
-    if (countdownDisplay) {
-        countdownDisplay.innerHTML = '<div style="font-size: 2rem; color: #FF0000; font-weight: 900;">ALREADY OBSOLETE!</div>';
-    }
-
-    if (AppState.countdownInterval) {
-        clearInterval(AppState.countdownInterval);
-        AppState.countdownInterval = null;
-    }
-}
-
-// ============================================
-// Odds Calculator
-// ============================================
-
-/**
- * Animate odds calculator
- */
-function animateOdds() {
-    const augmentEl = document.getElementById('augment-odds');
-    const replaceEl = document.getElementById('replace-odds');
-    const upskillEl = document.getElementById('upskill-odds');
-
-    if (!augmentEl || !replaceEl || !upskillEl) return;
-
-    // Reset to zero
-    augmentEl.textContent = '0.0';
-    replaceEl.textContent = '0.0';
-    upskillEl.textContent = '0.0';
-
-    // Animate each value with delay
-    if (typeof animateSlotRoll === 'function') {
-        // Augment odds
+    if (typeof createConfettiBurst === 'function') {
         setTimeout(() => {
-            animateSlotRoll(augmentEl, 0.3, 1500, () => {
-                if (typeof playDingSound === 'function') playDingSound();
-            });
-        }, 300);
+            createConfettiBurst(30);
+        }, 500);
+    }
+}
 
-        // Replace odds
-        setTimeout(() => {
-            animateSlotRoll(replaceEl, 47.0, 1800, () => {
-                if (typeof playDingSound === 'function') playDingSound();
-            });
-        }, 800);
+/**
+ * Reset mystery box for another try
+ */
+function resetMystery() {
+    const mysteryBox = document.getElementById('mystery-box-btn');
+    const mysteryResult = document.getElementById('mystery-result');
 
-        // Upskill odds (jackpot!)
-        setTimeout(() => {
-            animateSlotRoll(upskillEl, 99.9, 2000, () => {
-                if (typeof playDingSound === 'function') playDingSound();
+    if (!mysteryBox || !mysteryResult) return;
 
-                // Jackpot effects
-                const upskillItem = upskillEl.closest('.odd-item');
-                if (upskillItem && typeof addJackpotFlash === 'function') {
-                    addJackpotFlash(upskillItem);
-                }
+    // Hide result, show box
+    mysteryResult.classList.add('hidden');
+    mysteryBox.classList.remove('hidden');
 
-                // Confetti burst
-                if (typeof createConfettiBurst === 'function') {
-                    createConfettiBurst(30);
-                }
-            });
-        }, 1400);
+    // Play sound
+    if (typeof playDingSound === 'function') {
+        playDingSound();
+    }
+}
+
+/**
+ * Add service to mystery history
+ */
+function addToMysteryHistory(service) {
+    AppState.mysteryHistory.push(service);
+
+    const historyList = document.getElementById('mystery-history-list');
+    if (!historyList) return;
+
+    // Remove empty message if present
+    const emptyMsg = historyList.querySelector('.mystery-history-empty');
+    if (emptyMsg) {
+        emptyMsg.remove();
+    }
+
+    // Add new item
+    const item = document.createElement('div');
+    item.className = 'mystery-history-item';
+    item.innerHTML = `
+        <span class="history-icon">${service.icon}</span>
+        <span class="history-title">${service.title}</span>
+    `;
+
+    historyList.insertBefore(item, historyList.firstChild);
+
+    // Limit history to 10 items
+    while (historyList.children.length > 10) {
+        historyList.removeChild(historyList.lastChild);
     }
 }
 
@@ -429,7 +353,8 @@ function startUrgentTimer() {
             }, 1000);
 
             // Temporary message
-            timerText.textContent = 'TIMER EXTENDED!';
+            const originalHTML = timerText.innerHTML;
+            timerText.textContent = 'NEW SERVICES ADDED!';
             setTimeout(() => {
                 updateTimerDisplay();
             }, 2000);
@@ -455,135 +380,6 @@ function startUrgentTimer() {
 }
 
 // ============================================
-// Profile Rotation
-// ============================================
-
-/**
- * Start profile rotation
- */
-function startProfileRotation() {
-    // Display first profile
-    updateProfileDisplay();
-
-    // Rotate every 10 seconds
-    AppState.profileRotationInterval = setInterval(() => {
-        nextProfile(true); // Auto-advance
-    }, 10000);
-
-    // Set up manual controls
-    setupProfileControls();
-}
-
-/**
- * Set up profile carousel controls
- */
-function setupProfileControls() {
-    const prevBtn = document.getElementById('prev-profile');
-    const nextBtn = document.getElementById('next-profile');
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => previousProfile());
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => nextProfile(false));
-    }
-}
-
-/**
- * Go to next profile
- * @param {boolean} isAuto - Whether this is auto-rotation
- */
-function nextProfile(isAuto = false) {
-    AppState.currentProfileIndex = (AppState.currentProfileIndex + 1) % VULNERABLE_PROFILES.length;
-
-    if (typeof transitionProfile === 'function') {
-        transitionProfile(updateProfileDisplay);
-    } else {
-        updateProfileDisplay();
-    }
-
-    // Reset auto-rotation timer if manual
-    if (!isAuto) {
-        resetProfileRotation();
-    }
-}
-
-/**
- * Go to previous profile
- */
-function previousProfile() {
-    AppState.currentProfileIndex =
-        (AppState.currentProfileIndex - 1 + VULNERABLE_PROFILES.length) % VULNERABLE_PROFILES.length;
-
-    if (typeof transitionProfile === 'function') {
-        transitionProfile(updateProfileDisplay);
-    } else {
-        updateProfileDisplay();
-    }
-
-    // Reset auto-rotation timer
-    resetProfileRotation();
-}
-
-/**
- * Reset profile rotation timer
- */
-function resetProfileRotation() {
-    if (AppState.profileRotationInterval) {
-        clearInterval(AppState.profileRotationInterval);
-    }
-
-    AppState.profileRotationInterval = setInterval(() => {
-        nextProfile(true);
-    }, 10000);
-}
-
-/**
- * Update profile display
- */
-function updateProfileDisplay() {
-    const profile = VULNERABLE_PROFILES[AppState.currentProfileIndex];
-
-    // Update image (with fallback to placeholder)
-    const imgEl = document.getElementById('profile-image');
-    if (imgEl) {
-        imgEl.src = profile.image;
-        imgEl.alt = `Profile photo of ${profile.name}`;
-        // Fallback to placeholder if image fails
-        imgEl.onerror = function() {
-            this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="150"%3E%3Crect fill="%23333" width="150" height="150"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23FFD700" font-family="Arial" font-size="16"%3EProfile%3C/text%3E%3C/svg%3E';
-        };
-    }
-
-    // Update text content
-    const nameEl = document.getElementById('profile-name');
-    const titleEl = document.getElementById('profile-title');
-    const companyEl = document.getElementById('profile-company');
-    const experienceEl = document.getElementById('profile-experience');
-    const upskillEl = document.getElementById('profile-upskill');
-    const probabilityEl = document.getElementById('profile-probability');
-    const daysEl = document.getElementById('profile-days');
-    const noteEl = document.getElementById('profile-note');
-
-    if (nameEl) nameEl.textContent = profile.name;
-    if (titleEl) titleEl.textContent = profile.title;
-    if (companyEl) companyEl.textContent = profile.company;
-    if (experienceEl) experienceEl.textContent = profile.experience;
-    if (upskillEl) upskillEl.textContent = profile.lastUpskill;
-    if (probabilityEl) probabilityEl.textContent = profile.probability;
-    if (daysEl) daysEl.textContent = profile.daysRemaining;
-    if (noteEl) noteEl.textContent = profile.note;
-
-    // Update counter
-    const currentEl = document.getElementById('profile-current');
-    const totalEl = document.getElementById('profile-total');
-
-    if (currentEl) currentEl.textContent = AppState.currentProfileIndex + 1;
-    if (totalEl) totalEl.textContent = VULNERABLE_PROFILES.length;
-}
-
-// ============================================
 // CTA Button
 // ============================================
 
@@ -604,21 +400,19 @@ function setupCTAButton() {
         revealEl.classList.remove('hidden');
         revealEl.classList.add('reveal');
 
-        // Stop popups
+        // Stop popups if available
         if (typeof stopPopups === 'function') {
             stopPopups();
         }
 
-        // Show success popup
-        setTimeout(() => {
-            if (typeof showSuccessPopup === 'function') {
-                showSuccessPopup();
-            }
-        }, 1000);
-
         // Extra confetti
         if (typeof createConfettiBurst === 'function') {
             createConfettiBurst(100);
+        }
+
+        // Play sound
+        if (typeof playSlotMachineSound === 'function') {
+            playSlotMachineSound();
         }
     });
 }
@@ -631,14 +425,8 @@ function setupCTAButton() {
  * Clean up intervals on page unload
  */
 window.addEventListener('beforeunload', () => {
-    if (AppState.countdownInterval) {
-        clearInterval(AppState.countdownInterval);
-    }
     if (AppState.urgentTimerInterval) {
         clearInterval(AppState.urgentTimerInterval);
-    }
-    if (AppState.profileRotationInterval) {
-        clearInterval(AppState.profileRotationInterval);
     }
 });
 

@@ -870,3 +870,363 @@ body {
         transform: translateX(2px);
     }
 }
+
+/* ============================================
+   Tabs Section
+   ============================================ */
+.tabs-section {
+    margin-bottom: 2rem;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab-button {
+    flex: 1;
+    min-width: 150px;
+    padding: 1rem 1.5rem;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: 3px solid var(--lottery-gold);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-emboss);
+}
+
+.tab-button:hover {
+    background: var(--gradient-gold);
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-mega);
+}
+
+.tab-button.active {
+    background: var(--gradient-gold);
+    color: #000;
+    border-color: var(--lottery-red);
+    box-shadow: var(--shadow-mega);
+}
+
+.tab-content {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Personas Grid
+   ============================================ */
+.personas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.persona-card {
+    background: var(--bg-card);
+    border: 3px solid var(--lottery-gold);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.persona-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: var(--lottery-red);
+    box-shadow: var(--shadow-mega);
+}
+
+.persona-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+}
+
+.persona-name {
+    font-size: 1.5rem;
+    color: var(--lottery-gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.persona-hover-info {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.persona-card:hover .persona-hover-info {
+    opacity: 1;
+    max-height: 500px;
+}
+
+.service-list {
+    list-style: none;
+    text-align: left;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.service-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.service-list li::before {
+    content: '✨ ';
+    color: var(--lottery-gold);
+}
+
+/* ============================================
+   Automation Grid
+   ============================================ */
+.automation-grid,
+.companions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.automation-item,
+.companion-item {
+    background: var(--bg-card);
+    border: 2px solid var(--lottery-silver);
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.automation-item:hover,
+.companion-item:hover {
+    border-color: var(--lottery-gold);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card);
+}
+
+.automation-icon,
+.companion-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.automation-title,
+.companion-title {
+    font-size: 1.3rem;
+    color: var(--lottery-gold);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.automation-desc,
+.companion-desc {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+/* ============================================
+   Mystery Box
+   ============================================ */
+.mystery-card {
+    min-height: 500px;
+}
+
+.mystery-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.mystery-box {
+    background: var(--gradient-gold);
+    border: 5px solid var(--lottery-red);
+    padding: 3rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-mega);
+    animation: float 3s ease-in-out infinite;
+}
+
+.mystery-box:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+}
+
+.mystery-box-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.mystery-box-text {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.mystery-box-subtext {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.mystery-result {
+    padding: 2rem;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.mystery-result-content {
+    background: var(--bg-card);
+    border: 3px solid var(--lottery-gold);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-card);
+}
+
+.mystery-result-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.mystery-result-title {
+    font-size: 2rem;
+    color: var(--lottery-gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.mystery-result-desc {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.mystery-history {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.mystery-history-title {
+    font-size: 1.3rem;
+    color: var(--lottery-gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.mystery-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mystery-history-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--lottery-silver);
+    border-radius: 5px;
+}
+
+.history-icon {
+    font-size: 1.5rem;
+}
+
+.history-title {
+    font-size: 0.9rem;
+}
+
+.mystery-history-empty {
+    text-align: center;
+    color: var(--lottery-silver);
+    font-style: italic;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    .tabs-container {
+        flex-direction: column;
+    }
+
+    .tab-button {
+        min-width: 100%;
+    }
+
+    .personas-grid,
+    .automation-grid,
+    .companions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mystery-box {
+        padding: 2rem;
+    }
+
+    .mystery-box-icon {
+        font-size: 4rem;
+    }
+
+    .mystery-box-text {
+        font-size: 1.5rem;
+    }
+}
