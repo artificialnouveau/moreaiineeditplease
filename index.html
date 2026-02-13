@@ -727,23 +727,26 @@
                 <div id="review-form-container" class="review-form-container hidden">
                     <h3 id="reviewing-service-name" class="reviewing-service"></h3>
 
-                    <!-- Rating Options -->
-                    <div class="rating-options">
-                        <h4 class="rating-question">How would you rate this service?</h4>
-                        <div class="rating-buttons">
-                            <button class="rating-btn useful" data-rating="useful">
-                                <span class="rating-emoji">👍</span>
-                                <span class="rating-text">Useful</span>
-                            </button>
-                            <button class="rating-btn not-useful" data-rating="not-useful">
-                                <span class="rating-emoji">👎</span>
-                                <span class="rating-text">Not Useful</span>
-                            </button>
-                            <button class="rating-btn banned" data-rating="banned">
-                                <span class="rating-emoji">🚫</span>
-                                <span class="rating-text">Should Be Banned</span>
-                            </button>
+                    <!-- Usefulness Rating -->
+                    <div class="rating-dimension">
+                        <h4 class="rating-question">How useful is this service?</h4>
+                        <div class="rating-slider-container">
+                            <label class="slider-label-left">Useless</label>
+                            <input type="range" id="usefulness-slider" class="rating-slider" min="1" max="5" value="3">
+                            <label class="slider-label-right">Useful</label>
                         </div>
+                        <div class="slider-value" id="usefulness-value">3</div>
+                    </div>
+
+                    <!-- Desirability Rating -->
+                    <div class="rating-dimension">
+                        <h4 class="rating-question">Do you want this service?</h4>
+                        <div class="rating-slider-container">
+                            <label class="slider-label-left">Keep it away!</label>
+                            <input type="range" id="desirability-slider" class="rating-slider" min="1" max="5" value="3">
+                            <label class="slider-label-right">I want it!</label>
+                        </div>
+                        <div class="slider-value" id="desirability-value">3</div>
                     </div>
 
                     <!-- Comment Section -->
@@ -753,17 +756,41 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button id="submit-review-btn" class="cta-button" disabled>Submit Review</button>
+                    <button id="submit-review-btn" class="cta-button">Submit Review</button>
                     <p id="review-status" class="review-status"></p>
                 </div>
 
                 <!-- Results Dashboard -->
                 <div class="results-dashboard">
-                    <h3 class="dashboard-title">📊 Service Ratings Overview</h3>
-                    <p class="dashboard-description">See what others think about our AI services</p>
+                    <h3 class="dashboard-title"><i class="fas fa-chart-scatter"></i> Service Ratings Map</h3>
+                    <p class="dashboard-description">Services plotted by usefulness (left to right) and desirability (bottom to top)</p>
 
-                    <div id="ratings-grid" class="ratings-grid">
-                        <p class="loading-text">Loading ratings data...</p>
+                    <!-- 2D Grid Chart -->
+                    <div class="grid-chart-container">
+                        <div class="grid-chart-y-axis">
+                            <div class="y-axis-label y-axis-top">I WANT IT!</div>
+                            <div class="y-axis-label y-axis-middle">Neutral</div>
+                            <div class="y-axis-label y-axis-bottom">Keep Away</div>
+                        </div>
+                        <div class="grid-chart-main">
+                            <canvas id="ratings-chart" width="600" height="500"></canvas>
+                            <div class="grid-chart-x-axis">
+                                <div class="x-axis-label x-axis-left">Useless</div>
+                                <div class="x-axis-label x-axis-middle">Neutral</div>
+                                <div class="x-axis-label x-axis-right">Useful</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="chart-legend">
+                        <h4 class="legend-title">How to read this chart:</h4>
+                        <ul class="legend-list">
+                            <li><strong>Top Right (Useful + Want It):</strong> Most desired services</li>
+                            <li><strong>Top Left (Useless + Want It):</strong> Fun but impractical</li>
+                            <li><strong>Bottom Right (Useful + Keep Away):</strong> Practical but unwanted</li>
+                            <li><strong>Bottom Left (Useless + Keep Away):</strong> Least desired services</li>
+                        </ul>
                     </div>
                 </div>
             </div>

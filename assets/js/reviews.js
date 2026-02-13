@@ -9,7 +9,8 @@
 
 const ReviewState = {
     selectedService: null,
-    selectedRating: null,
+    usefulness: 3,
+    desirability: 3,
     allRatings: {}
 };
 
@@ -19,7 +20,10 @@ const ReviewState = {
 
 function initReviews() {
     const serviceSelect = document.getElementById('service-select');
-    const ratingButtons = document.querySelectorAll('.rating-btn');
+    const usefulnessSlider = document.getElementById('usefulness-slider');
+    const desirabilitySlider = document.getElementById('desirability-slider');
+    const usefulnessValue = document.getElementById('usefulness-value');
+    const desirabilityValue = document.getElementById('desirability-value');
     const submitButton = document.getElementById('submit-review-btn');
 
     if (!serviceSelect) return;
@@ -34,21 +38,23 @@ function initReviews() {
         }
     });
 
-    // Rating button selection
-    ratingButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            ratingButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            button.classList.add('active');
-            // Store rating
-            ReviewState.selectedRating = button.dataset.rating;
-            // Enable submit button
-            if (submitButton) {
-                submitButton.disabled = false;
-            }
+    // Usefulness slider
+    if (usefulnessSlider && usefulnessValue) {
+        usefulnessSlider.addEventListener('input', (e) => {
+            const value = e.target.value;
+            ReviewState.usefulness = parseInt(value);
+            usefulnessValue.textContent = value;
         });
-    });
+    }
+
+    // Desirability slider
+    if (desirabilitySlider && desirabilityValue) {
+        desirabilitySlider.addEventListener('input', (e) => {
+            const value = e.target.value;
+            ReviewState.desirability = parseInt(value);
+            desirabilityValue.textContent = value;
+        });
+    }
 
     // Submit review
     if (submitButton) {
@@ -90,21 +96,24 @@ function hideReviewForm() {
 }
 
 function resetReviewForm() {
-    // Clear rating selection
-    document.querySelectorAll('.rating-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+    // Reset sliders to default (3)
+    const usefulnessSlider = document.getElementById('usefulness-slider');
+    const desirabilitySlider = document.getElementById('desirability-slider');
+    const usefulnessValue = document.getElementById('usefulness-value');
+    const desirabilityValue = document.getElementById('desirability-value');
+
+    if (usefulnessSlider) usefulnessSlider.value = 3;
+    if (desirabilitySlider) desirabilitySlider.value = 3;
+    if (usefulnessValue) usefulnessValue.textContent = '3';
+    if (desirabilityValue) desirabilityValue.textContent = '3';
+
+    ReviewState.usefulness = 3;
+    ReviewState.desirability = 3;
 
     // Clear comment
     const commentField = document.getElementById('review-comment');
     if (commentField) {
         commentField.value = '';
-    }
-
-    // Disable submit button
-    const submitButton = document.getElementById('submit-review-btn');
-    if (submitButton) {
-        submitButton.disabled = true;
     }
 
     // Clear status message
@@ -113,8 +122,6 @@ function resetReviewForm() {
         statusEl.textContent = '';
         statusEl.className = 'review-status';
     }
-
-    ReviewState.selectedRating = null;
 }
 
 // ============================================
@@ -122,8 +129,8 @@ function resetReviewForm() {
 // ============================================
 
 function submitReview() {
-    if (!ReviewState.selectedService || !ReviewState.selectedRating) {
-        showStatus('Please select a rating', 'error');
+    if (!ReviewState.selectedService) {
+        showStatus('Please select a service', 'error');
         return;
     }
 
@@ -131,7 +138,8 @@ function submitReview() {
 
     const reviewData = {
         service: ReviewState.selectedService,
-        rating: ReviewState.selectedRating,
+        usefulness: ReviewState.usefulness,
+        desirability: ReviewState.desirability,
         comment: comment,
         timestamp: firebase.firestore.Timestamp.now()
     };
@@ -152,10 +160,6 @@ function saveToFirestore(reviewData) {
         .collection('entries')
         .add(reviewData)
         .then(() => {
-            // Update rating counts
-            return updateRatingCount(ReviewState.selectedService, ReviewState.selectedRating);
-        })
-        .then(() => {
             showStatus('Thank you for your feedback! ✓', 'success');
             setTimeout(() => {
                 resetReviewForm();
@@ -166,19 +170,6 @@ function saveToFirestore(reviewData) {
             console.error('Error saving review:', error);
             showStatus('Error saving review. Please try again.', 'error');
         });
-}
-
-function updateRatingCount(service, rating) {
-    const ratingsRef = db.collection('ratings').doc(service);
-
-    return db.runTransaction((transaction) => {
-        return transaction.get(ratingsRef).then((doc) => {
-            const currentData = doc.exists ? doc.data() : { useful: 0, 'not-useful': 0, banned: 0 };
-            const newCount = (currentData[rating] || 0) + 1;
-            currentData[rating] = newCount;
-            transaction.set(ratingsRef, currentData);
-        });
-    });
 }
 
 function saveToLocalStorage(reviewData) {
@@ -218,12 +209,46 @@ function loadRatingsData() {
 }
 
 function loadFromFirestore() {
-    db.collection('ratings')
-        .get()
-        .then((querySnapshot) => {
+    // Load all reviews from all services
+    const servicesPromises = [];
+    const serviceSelect = document.getElementById('service-select');
+
+    // Get all service options
+    const options = serviceSelect.querySelectorAll('option[value]');
+    const serviceNames = Array.from(options)
+        .map(opt => opt.value)
+        .filter(val => val !== '');
+
+    // Load reviews for each service
+    serviceNames.forEach(serviceName => {
+        const promise = db.collection('reviews')
+            .doc(serviceName)
+            .collection('entries')
+            .get()
+            .then((querySnapshot) => {
+                const reviews = [];
+                querySnapshot.forEach((doc) => {
+                    reviews.push(doc.data());
+                });
+                return { service: serviceName, reviews };
+            });
+        servicesPromises.push(promise);
+    });
+
+    Promise.all(servicesPromises)
+        .then((servicesData) => {
+            // Calculate average ratings
             const ratings = {};
-            querySnapshot.forEach((doc) => {
-                ratings[doc.id] = doc.data();
+            servicesData.forEach(({ service, reviews }) => {
+                if (reviews.length > 0) {
+                    const avgUsefulness = reviews.reduce((sum, r) => sum + r.usefulness, 0) / reviews.length;
+                    const avgDesirability = reviews.reduce((sum, r) => sum + r.desirability, 0) / reviews.length;
+                    ratings[service] = {
+                        usefulness: avgUsefulness,
+                        desirability: avgDesirability,
+                        count: reviews.length
+                    };
+                }
             });
             ReviewState.allRatings = ratings;
             displayRatings();
@@ -239,11 +264,25 @@ function loadFromLocalStorage() {
     const reviews = JSON.parse(localStorage.getItem('aiServiceReviews') || '[]');
     const ratings = {};
 
+    // Group reviews by service
+    const serviceReviews = {};
     reviews.forEach(review => {
-        if (!ratings[review.service]) {
-            ratings[review.service] = { useful: 0, 'not-useful': 0, banned: 0 };
+        if (!serviceReviews[review.service]) {
+            serviceReviews[review.service] = [];
         }
-        ratings[review.service][review.rating] = (ratings[review.service][review.rating] || 0) + 1;
+        serviceReviews[review.service].push(review);
+    });
+
+    // Calculate averages
+    Object.keys(serviceReviews).forEach(service => {
+        const serviceData = serviceReviews[service];
+        const avgUsefulness = serviceData.reduce((sum, r) => sum + r.usefulness, 0) / serviceData.length;
+        const avgDesirability = serviceData.reduce((sum, r) => sum + r.desirability, 0) / serviceData.length;
+        ratings[service] = {
+            usefulness: avgUsefulness,
+            desirability: avgDesirability,
+            count: serviceData.length
+        };
     });
 
     ReviewState.allRatings = ratings;
@@ -251,85 +290,142 @@ function loadFromLocalStorage() {
 }
 
 function displayRatings() {
-    const ratingsGrid = document.getElementById('ratings-grid');
-    if (!ratingsGrid) return;
+    const canvas = document.getElementById('ratings-chart');
+    if (!canvas) return;
 
-    // Clear loading text
-    ratingsGrid.innerHTML = '';
-
-    // Get all unique services
+    const ctx = canvas.getContext('2d');
     const services = Object.keys(ReviewState.allRatings);
 
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set up dimensions
+    const padding = 40;
+    const chartWidth = canvas.width - padding * 2;
+    const chartHeight = canvas.height - padding * 2;
+
+    // Draw grid
+    drawGrid(ctx, padding, chartWidth, chartHeight);
+
     if (services.length === 0) {
-        ratingsGrid.innerHTML = '<p class="no-ratings">No ratings yet. Be the first to review!</p>';
+        ctx.fillStyle = '#666';
+        ctx.font = '16px Helvetica, Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('No ratings yet. Be the first to review!', canvas.width / 2, canvas.height / 2);
         return;
     }
 
-    // Sort by total ratings (most reviewed first)
-    services.sort((a, b) => {
-        const totalA = getTotalRatings(ReviewState.allRatings[a]);
-        const totalB = getTotalRatings(ReviewState.allRatings[b]);
-        return totalB - totalA;
-    });
+    // Draw quadrant labels
+    drawQuadrantLabels(ctx, padding, chartWidth, chartHeight);
 
-    // Display each service rating
+    // Plot services
     services.forEach(service => {
-        const ratings = ReviewState.allRatings[service];
-        const ratingCard = createRatingCard(service, ratings);
-        ratingsGrid.appendChild(ratingCard);
+        const data = ReviewState.allRatings[service];
+        plotService(ctx, service, data, padding, chartWidth, chartHeight);
     });
 }
 
-function createRatingCard(serviceName, ratings) {
-    const card = document.createElement('div');
-    card.className = 'rating-card';
+function drawGrid(ctx, padding, width, height) {
+    ctx.strokeStyle = '#E0E0E0';
+    ctx.lineWidth = 1;
 
-    const useful = ratings.useful || 0;
-    const notUseful = ratings['not-useful'] || 0;
-    const banned = ratings.banned || 0;
-    const total = useful + notUseful + banned;
+    // Draw border
+    ctx.strokeRect(padding, padding, width, height);
 
-    const usefulPercent = total > 0 ? Math.round((useful / total) * 100) : 0;
-    const notUsefulPercent = total > 0 ? Math.round((notUseful / total) * 100) : 0;
-    const bannedPercent = total > 0 ? Math.round((banned / total) * 100) : 0;
+    // Draw center lines
+    ctx.beginPath();
+    // Vertical center line
+    ctx.moveTo(padding + width / 2, padding);
+    ctx.lineTo(padding + width / 2, padding + height);
+    // Horizontal center line
+    ctx.moveTo(padding, padding + height / 2);
+    ctx.lineTo(padding + width, padding + height / 2);
+    ctx.stroke();
 
-    card.innerHTML = `
-        <h4 class="rating-card-title">${serviceName}</h4>
-        <div class="rating-stats">
-            <div class="rating-stat useful-stat">
-                <span class="stat-emoji">👍</span>
-                <span class="stat-label">Useful</span>
-                <span class="stat-value">${usefulPercent}%</span>
-                <div class="stat-bar">
-                    <div class="stat-bar-fill useful" style="width: ${usefulPercent}%"></div>
-                </div>
-            </div>
-            <div class="rating-stat not-useful-stat">
-                <span class="stat-emoji">👎</span>
-                <span class="stat-label">Not Useful</span>
-                <span class="stat-value">${notUsefulPercent}%</span>
-                <div class="stat-bar">
-                    <div class="stat-bar-fill not-useful" style="width: ${notUsefulPercent}%"></div>
-                </div>
-            </div>
-            <div class="rating-stat banned-stat">
-                <span class="stat-emoji">🚫</span>
-                <span class="stat-label">Should Be Banned</span>
-                <span class="stat-value">${bannedPercent}%</span>
-                <div class="stat-bar">
-                    <div class="stat-bar-fill banned" style="width: ${bannedPercent}%"></div>
-                </div>
-            </div>
-        </div>
-        <p class="rating-total">${total} ${total === 1 ? 'review' : 'reviews'}</p>
-    `;
+    // Draw grid lines
+    ctx.strokeStyle = '#F0F0F0';
+    ctx.lineWidth = 0.5;
 
-    return card;
+    // Vertical lines
+    for (let i = 1; i < 5; i++) {
+        if (i !== 2) { // Skip center
+            ctx.beginPath();
+            ctx.moveTo(padding + (width / 4) * i, padding);
+            ctx.lineTo(padding + (width / 4) * i, padding + height);
+            ctx.stroke();
+        }
+    }
+
+    // Horizontal lines
+    for (let i = 1; i < 5; i++) {
+        if (i !== 2) { // Skip center
+            ctx.beginPath();
+            ctx.moveTo(padding, padding + (height / 4) * i);
+            ctx.lineTo(padding + width, padding + (height / 4) * i);
+            ctx.stroke();
+        }
+    }
 }
 
-function getTotalRatings(ratings) {
-    if (!ratings) return 0;
-    return (ratings.useful || 0) + (ratings['not-useful'] || 0) + (ratings.banned || 0);
+function drawQuadrantLabels(ctx, padding, width, height) {
+    ctx.fillStyle = '#999';
+    ctx.font = '11px Helvetica, Arial, sans-serif';
+    ctx.textAlign = 'center';
+
+    // Top right - ideal
+    ctx.fillText('IDEAL', padding + width * 0.75, padding + height * 0.25);
+
+    // Top left - fun but useless
+    ctx.fillText('FUN', padding + width * 0.25, padding + height * 0.25);
+
+    // Bottom right - practical but unwanted
+    ctx.fillText('PRACTICAL', padding + width * 0.75, padding + height * 0.75);
+
+    // Bottom left - worst
+    ctx.fillText('AVOID', padding + width * 0.25, padding + height * 0.75);
+}
+
+function plotService(ctx, serviceName, data, padding, chartWidth, chartHeight) {
+    // Map 1-5 scale to canvas coordinates
+    // usefulness: 1 (left) to 5 (right)
+    // desirability: 1 (bottom) to 5 (top)
+    const x = padding + ((data.usefulness - 1) / 4) * chartWidth;
+    const y = padding + chartHeight - ((data.desirability - 1) / 4) * chartHeight;
+
+    // Size based on review count (min 5, max 15)
+    const radius = Math.min(15, Math.max(5, 5 + data.count));
+
+    // Color based on position (gradient)
+    const hue = ((data.usefulness - 1) / 4) * 120; // 0 (red) to 120 (green)
+    const lightness = 40 + ((data.desirability - 1) / 4) * 20; // 40% to 60%
+    ctx.fillStyle = `hsl(${hue}, 70%, ${lightness}%)`;
+
+    // Draw circle
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Draw border
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw label (abbreviated if needed)
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 10px Helvetica, Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const shortName = serviceName.length > 20 ? serviceName.substring(0, 17) + '...' : serviceName;
+
+    // White background for text
+    const textMetrics = ctx.measureText(shortName);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.fillRect(x - textMetrics.width / 2 - 3, y - 6, textMetrics.width + 6, 12);
+
+    // Draw text
+    ctx.fillStyle = '#333';
+    ctx.fillText(shortName, x, y);
 }
 
 // ============================================
