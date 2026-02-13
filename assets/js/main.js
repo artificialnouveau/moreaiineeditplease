@@ -9,7 +9,7 @@
 // ============================================
 
 const AppState = {
-    currentTab: 'personas',
+    currentTab: 'companions',
     urgentTimerInterval: null,
     mysteryHistory: []
 };
@@ -124,12 +124,7 @@ function initApp() {
     // Set up CTA button
     setupCTAButton();
 
-    // Start popup system (if available)
-    if (typeof startPopups === 'function') {
-        startPopups();
-    }
-
-    console.log('More AI In Ee Edit Please - Initialized');
+    console.log('More AI ! I Need It! Please! - Initialized');
 }
 
 // ============================================
@@ -399,11 +394,6 @@ function setupCTAButton() {
         // Show reveal text
         revealEl.classList.remove('hidden');
         revealEl.classList.add('reveal');
-
-        // Stop popups if available
-        if (typeof stopPopups === 'function') {
-            stopPopups();
-        }
 
         // Extra confetti
         if (typeof createConfettiBurst === 'function') {
