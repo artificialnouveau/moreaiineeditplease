@@ -13,12 +13,12 @@
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyBwa2yNYji98oKxCEF9LiIUfiAfFJkvET8",
+    authDomain: "moreai-a9090.firebaseapp.com",
+    projectId: "moreai-a9090",
+    storageBucket: "moreai-a9090.firebasestorage.app",
+    messagingSenderId: "360099384366",
+    appId: "1:360099384366:web:fa7575a3c139b9a63423bf"
 };
 
 // Initialize Firebase
