@@ -1,127 +1,97 @@
-# Will I Have A Job? 🎰
+# More AI! I Need It! Please! 🤖✨
 
-A satirical website that parodies AI replacement anxiety with garish lottery ticket aesthetics.
+A satirical e-commerce site showcasing real but absurd, strange, and useless AI products that actually exist.
 
 ## 🎯 Purpose
 
-This website satirizes the fear-mongering and anxiety often created around AI job replacement predictions. Through intentionally over-the-top design and fake "predictions," it highlights how absurd and predatory some AI replacement narratives can be.
+This site parodies the AI hype cycle by presenting real AI products in a deliberately over-the-top 90s infomercial style. Every product listed is real — the comedy comes from the fact that these things actually exist.
+
+## 🛒 Featured Products
+
+### Automation
+- **GoveeLife Smart Ice Maker** — AI-powered countertop ice maker with "NoiseGuard" technology
+- **Humane AI Pin** — $699 wearable that projects a laser on your palm (worst-reviewed product ever)
+- **Rabbit R1** — $199 orange gadget meant to replace your phone ("useless paperweight")
+- **Kirin Electric Salt Spoon** — Electrocutes your tongue to simulate saltiness (Ig Nobel Prize winner)
+- **Spicerr AI Spice Dispenser** — AI-powered spice rack with flavor profiles
+- **McDonald's AI Drive-Thru** — Famously added bacon to ice cream, was shut down
+- **AI Dating Profile Writer** — Bumble's AI bio rewriter (41% of singles using it)
+
+### Companions
+- **Friend AI Necklace** — $99 pendant that eavesdrops 24/7 and texts you commentary
+- **Hyodol AI Doll** — ChatGPT-powered grandchild doll for elderly in South Korea
+- **Razer Project AVA** — 5.5" holographic desk companion (CES 2026)
+- **Mirumi by Yukai** — Fuzzy robot that peeks from your handbag
+- **Fufuly Breathing Pillow** — Robotic pillow that simulates breathing ($133)
+- **Replika AI Companion** — AI girlfriend/boyfriend app (50M+ users)
+- **Realbotix Aria** — $175,000 AI girlfriend robot with swappable RFID faces
+- **MoltMatch Dating AI** — AI that creates your dating profile and flirts for you
+- **AI Fortune Teller** — AstroSage & Vedic AstroGPT (42% of astrology apps use AI)
+- **WeHead GPT Edition** — $4,950 robotic head with 4 screens showing a face
+
+### Specialized Therapists
+- **Y-Brush Halo AI Toothbrush** — Claims to diagnose 300+ diseases from your breath
+- **Haut.AI Face Analysis** — Counts your individual pores and maps every flaw
+- **Amorepacific Skinsight Patch** — Tracks skin tightness at micrometer level
+- **Ron Carpenter AI Pastor** — $49/month AI megachurch pastor
+- **AI Jesus Confessional** — GPT-4o Jesus hologram in a Swiss church (900+ confessions)
+- **DoNotPay "AI Lawyer"** — FTC fined them $193,000 for false claims
+- **MeowTalk Cat Translator** — 22M+ downloads, "translates" cat meows
+- **Nanni Baby Cry Translator** — AI that tells you why your baby is crying
+- **Lovense Emily** — AI companion doll from CES 2026 ($4,000-$8,000)
+
+### Mystery Box
+Random selection of real products including Swarovski AI Binoculars ($4,799), Nekojita FuFu (robot that blows on your soup), Roborock Saros Z70 (vacuum with a robot arm), Kohler AI Smart Toilet, and more.
 
 ## ✨ Features
 
-- **Occupation Search**: Enter any job title to get a "prediction" of when AI will make it obsolete
-- **Deterministic Algorithm**: Same occupation always gets the same (fake) result
-- **Countdown Timer**: Live countdown to your job's "obsolescence date"
-- **Odds Calculator**: Slot machine-style animation revealing your "survival odds"
-- **Annoying Popups**: Escalating popup frequency mimicking predatory upskilling marketing
-- **Garish Aesthetics**: Intentionally over-the-top lottery ticket design
-- **Visual Effects**: Sparkles, confetti, and animations for maximum tackiness
-- **Vulnerable Profiles**: Rotating fake LinkedIn-style profiles of "at-risk" workers
-- **Fake Urgent Timer**: Never-ending countdown creating false urgency
+- **Tabbed Interface**: Automation, Companions, Therapists, Mystery Box, Pricing, Reviews
+- **Mystery Box**: Slot-machine style random product reveal with confetti
+- **AI Chatbot Advisor**: Keyword-based product recommendations
+- **Review System**: Rate products on usefulness and desirability with Firebase backend
+- **Scatter Plot**: 2D chart plotting all ratings
+- **Fake Urgency Timer**: Countdown banner creating false urgency
+- **Sparkles & Confetti**: Particle effects for maximum tackiness
+- **Sound Effects**: Dings and slot machine sounds
+- **Custom Cursor**: Computer emoji cursor
 
 ## 🛠 Tech Stack
 
-- **Pure HTML/CSS/JavaScript**: No frameworks, no build process
-- **Zero Dependencies**: Completely self-contained
-- **GitHub Pages**: Free hosting, easy deployment
-- **Accessibility**: Keyboard navigation, screen reader support, respects reduced motion preferences
-
-## 🚀 Deployment
-
-This site is designed to be hosted on GitHub Pages:
-
-1. Push all files to your repository
-2. Go to Settings → Pages
-3. Set Source to: main branch, root directory
-4. Your site will be live at: `https://yourusername.github.io/willihaveajob/`
+- **Pure HTML/CSS/JavaScript** — No frameworks, no build process
+- **Firebase Firestore** — Review storage and retrieval
+- **Font Awesome** — Icons
+- **GitHub Pages** — Hosted as a subfolder of artificialnouveau.github.io
 
 ## 📂 Project Structure
 
 ```
-willihaveajob/
-├── index.html                    # Main HTML file
+moreaiineeditplease/
+├── index.html              # Main HTML (all tabs, review form, chatbot)
 ├── assets/
 │   ├── css/
-│   │   ├── main.css             # Core styles and lottery aesthetic
-│   │   ├── animations.css       # Sparkles, confetti, effects
-│   │   └── popup.css            # Popup modal styles
+│   │   ├── main.css        # Core styles (90s e-commerce aesthetic)
+│   │   ├── animations.css  # Sparkles, confetti, effects
+│   │   └── popup.css       # Popup modal styles
 │   ├── js/
-│   │   ├── main.js              # Main application orchestrator
-│   │   ├── occupations.js       # Occupation data & prediction logic
-│   │   ├── animations.js        # Sparkle and confetti systems
-│   │   ├── audio.js             # Sound management
-│   │   └── popup.js             # Popup system
-│   ├── sounds/                  # Audio files (optional)
-│   └── images/                  # Profile images (optional)
-├── README.md
-└── .gitignore
+│   │   ├── main.js         # Tab switching, mystery box, timer
+│   │   ├── chatbot.js      # AI advisor chatbot with keyword matching
+│   │   ├── reviews.js      # Firebase review system & scatter plot
+│   │   ├── audio.js        # Sound management
+│   │   ├── popup.js        # Popup system
+│   │   └── firebase-config.js
+│   ├── sounds/             # Audio files
+│   └── images/             # Product images
+└── README.md
 ```
 
 ## 🎨 Design Philosophy
 
-The intentionally garish lottery ticket aesthetic serves the satire:
+The intentionally garish 90s e-commerce aesthetic is the joke. Blinking banners, urgent countdown timers, confetti explosions, and "MOST POPULAR" pricing badges — presented with the sincerity of a late-night infomercial selling a $175,000 robot girlfriend.
 
-- **Gold and red color scheme**: Mimics scratch-off lottery tickets
-- **Metallic gradients**: Over-the-top "luxurious" feel
-- **Multiple shadows**: Excessive depth and embossing
-- **Blinking and pulsing**: Creates false urgency
-- **Slot machine effects**: Numbers "roll" like gambling machines
+## 🚀 Deployment
 
-All of this reinforces how job replacement predictions often use psychological manipulation similar to gambling and predatory marketing.
-
-## 🔊 Audio Files
-
-The site references sound files but will function without them:
-
-- `slot-machine.mp3`: Background ambiance
-- `winner.mp3`: Winner sound effect
-- `ding.mp3`: UI interaction sound
-
-You can add your own sound files or remove audio functionality entirely.
-
-## 🖼 Profile Images
-
-The vulnerable profiles section uses placeholder images. To add real images:
-
-1. Use AI-generated faces from [ThisPersonDoesNotExist.com](https://thispersondoesnotexist.com/)
-2. Save 10 images as `profile1.jpg` through `profile10.jpg`
-3. Place in `assets/images/profiles/`
-
-The site includes fallback SVG placeholders if images are missing.
-
-## ♿ Accessibility
-
-Despite the satirical nature, the site maintains accessibility:
-
-- Semantic HTML structure
-- ARIA labels for dynamic content
-- Keyboard navigation (Tab, Enter, Escape)
-- Screen reader compatibility
-- Respects `prefers-reduced-motion`
-- Respects `prefers-contrast`
-- Focus indicators
-
-## 🤝 Contributing
-
-This is a satirical art project, but contributions are welcome:
-
-- Bug fixes
-- New occupation predictions
-- Additional popup messages
-- Improved satirical notes
-- Accessibility improvements
-
-## ⚖️ License
-
-This project is released into the public domain. Use it however you want.
-
-## 💡 Inspiration
-
-Created in response to the proliferation of AI replacement fear-mongering that often serves to sell expensive courses, certifications, and "upskilling" programs while creating unnecessary anxiety.
+Hosted as a subfolder at: https://www.artificialnouveau.com/moreaiineeditplease/
 
 ## 🎭 Disclaimer
 
-This is satire. All predictions are fake. All statistics are made up. All profiles are fictional. Don't take career advice from lottery-themed websites.
-
----
-
-**Remember**: AI is a tool that will change how we work, but predictions about specific jobs and timelines are speculation. Focus on learning what interests you, not what fear-mongering tells you to learn.
+All products listed are real. That's the scary part.
